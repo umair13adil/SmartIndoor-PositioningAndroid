@@ -1,6 +1,8 @@
 package com.cubivue.inlogic.data.repositories.room
 
 import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
 import com.cubivue.inlogic.data.db.AppDatabase
 import com.cubivue.inlogic.data.db.AppExecutors
 import com.cubivue.inlogic.model.accessPoint.AccessPoint
@@ -13,7 +15,7 @@ import javax.inject.Singleton
 @Singleton
 open class RoomRepository @Inject constructor(
     @Named("roomDatasource") private val dataSource: RoomMapperActivityDataSource,
-    private val appDatabase: AppDatabase
+    val appDatabase: AppDatabase
 ) {
 
     private val TAG = "RoomRepository"
@@ -29,15 +31,12 @@ open class RoomRepository @Inject constructor(
         return dataSource.getRoomsData()
     }
 
-    fun getAccessPointsList(): List<AccessPoint>? {
-        dataSource.getAccessPoints()?.let {
-            Log.i(TAG,"getAccessPointsList: Return list ${it.size}")
-            return it
-        } ?: AppExecutors.instance?.diskIO()?.execute {
-            Log.i(TAG,"getAccessPointsList: Fetch from DB..")
-            appDatabase.accessPointDao().getAllAccessPoints()
-        }
+    fun saveAccessPoints(accessPoints: List<AccessPoint>) {
+        dataSource.addAccessPoints(accessPoints)
+    }
 
-        return null
+    fun getAccessPointsList(): List<AccessPoint> {
+        Log.i(TAG, "getAccessPointsList: Fetching from cache")
+        return dataSource.getAccessPoints()
     }
 }

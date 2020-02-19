@@ -14,12 +14,12 @@ import kotlinx.android.synthetic.main.item_access_points.view.*
 class AccessPointDiffCallback : DiffUtil.ItemCallback<AccessPoint>() {
 
     override fun areItemsTheSame(oldItem: AccessPoint, newItem: AccessPoint): Boolean {
-        return oldItem.id == newItem.id
+        return oldItem.ssid == newItem.ssid
 
     }
 
     override fun areContentsTheSame(oldItem: AccessPoint, newItem: AccessPoint): Boolean {
-        return oldItem.id == newItem.id
+        return oldItem.ssid == newItem.ssid
     }
 }
 

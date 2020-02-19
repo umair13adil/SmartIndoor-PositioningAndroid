@@ -1,5 +1,7 @@
 package com.cubivue.inlogic.data.repositories.room
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.cubivue.inlogic.model.accessPoint.AccessPoint
 import com.cubivue.inlogic.model.accessPoint.AccessPointActivityData
 import com.cubivue.inlogic.model.room.Room
@@ -19,15 +21,12 @@ object RoomMapperActivityDataSource : RoomDataSource {
         return RoomMapperActivityData(listOfRooms)
     }
 
-    override fun getAccessPoints(): List<AccessPoint>? {
-        if (listOfAccessPoint.isNotEmpty()) {
-            return listOfAccessPoint
-        } else {
-            return null
-        }
+    override fun getAccessPoints(): List<AccessPoint> {
+        return listOfAccessPoint
     }
 
     override fun addAccessPoints(accessPoints: List<AccessPoint>) {
+        listOfAccessPoint.clear()
         listOfAccessPoint.addAll(accessPoints)
     }
 }

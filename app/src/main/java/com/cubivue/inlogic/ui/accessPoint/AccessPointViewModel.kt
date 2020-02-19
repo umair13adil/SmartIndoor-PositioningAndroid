@@ -2,7 +2,6 @@ package com.cubivue.inlogic.ui.accessPoint
 
 import android.content.Context
 import android.net.wifi.ScanResult
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.cubivue.inlogic.data.repositories.accessPoint.AccessPointRepository
 import com.cubivue.inlogic.model.accessPoint.AccessPoint
@@ -23,7 +22,7 @@ class AccessPointViewModel @Inject constructor(
         repository.saveRoom(room)
     }
 
-    fun addAccessPoints(accessPoints: List<AccessPoint>) {
+    fun saveAccessPoints(accessPoints: List<AccessPoint>) {
         repository.saveAccessPoints(accessPoints)
     }
 
@@ -34,7 +33,7 @@ class AccessPointViewModel @Inject constructor(
     private fun addAccessPointInfo(res: ScanResult) {
         accessPoints.add(
             AccessPoint(
-                id = res.BSSID,
+                ssid = res.BSSID,
                 name = res.SSID,
                 strength = res.level,
                 scanTime = res.timestamp
@@ -45,7 +44,7 @@ class AccessPointViewModel @Inject constructor(
     fun addAccessPointsToList(results: List<ScanResult>): List<AccessPoint> {
 
         results.forEach { res ->
-            Log.i(TAG, res.toString())
+            //Log.i(TAG, res.toString())
             addAccessPointInfo(res)
         }
 
@@ -54,7 +53,7 @@ class AccessPointViewModel @Inject constructor(
             it.strength
         }
 
-        addAccessPoints(sorted)
+        saveAccessPoints(sorted)
 
         return sorted
     }

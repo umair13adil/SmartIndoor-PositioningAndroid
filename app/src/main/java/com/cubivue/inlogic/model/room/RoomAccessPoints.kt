@@ -8,7 +8,7 @@ data class RoomAccessPoints(
     @Embedded val room: Room,
     @Relation(
         parentColumn = "roomId",
-        entityColumn = "id"
+        entityColumn = "ssid"
     )
     val accessPoints: List<AccessPoint>
 )
