@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="@dimen/margin_10">
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txt_access_point_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/fcrTextDark"
+        android:textSize="@dimen/txt_size_16" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txt_scan_time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/fcrTextDark"
+        android:textSize="@dimen/txt_size_16" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txt_strength"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/fcrTextDark"
+        android:textSize="@dimen/txt_size_16" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/margin_1"
+        android:layout_marginTop="@dimen/margin_2"
+        android:background="@color/colorGrayLight" />
+</LinearLayout>

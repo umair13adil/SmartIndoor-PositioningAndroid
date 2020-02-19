@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#039BE5</color>
+    <color name="colorPrimaryDark">#1976D2</color>
+    <color name="colorAccent">@color/colorJobInProgress</color>
+
+    <color name="fcrText">#333333</color>
+    <color name="fcrTextDark">#333333</color>
+    <color name="fcrTextLight">#333333</color>
+    <color name="fcrGreen">#6bb25a</color>
+
+    <color name="alarmRed">#c42d2d</color>
+
+    <color name="fabColor">@color/colorPrimary</color>
+    <color name="menuIconsColor">@color/universalWhite</color>
+    <color name="colorWidgets">@color/colorAccent</color>
+    <color name="cardBackground">@color/universalWhite</color>
+    <color name="colorBorder">@color/fcrTextLight</color>
+    <color name="colorSelected">#29B6F6</color>
+    <color name="colorJobInProgress">#26C6DA</color>
+    <color name="colorScheduleCard">#F9DCAE</color>
+    <color name="colorCompletedGreen">#6BB25A</color>
+
+    <color name="colorCheckIn">#5efc82</color>
+    <color name="colorCheckOut">#64c1ff</color>
+
+    <color name="colorButtonLight">#FAFAFA</color>
+    <color name="colorButtonVerified">#E9F4E6</color>
+
+    <color name="fcrGrayLight">#f0f0f0</color>
+
+    <color name="fcrGreenLight">#e9f4e6</color>
+    <color name="fcrGreenDark">#58924a</color>
+
+    <color name="colorChatBubble">#eee</color>
+
+    <color name="universalWhite">#ffffff</color>
+    <color name="universalBlack">#000000</color>
+    <color name="colorThemed">@color/colorPrimary</color>
+
+    <color name="transparent">#00000000</color>
+    <color name="translucentBlack">#55000000</color>
+    <color name="translucentBlackDark">#AA000000</color>
+    <color name="menuBackground">#c8000000</color>
+    <color name="translucentWhite">#4bffffff</color>
+    <color name="colorBackground">#fbfbfb</color>
+    <color name="colorBackgroundLight">#F5F5F5</color>
+
+    <color name="colorTextLight">#dfdfe0</color>
+    <color name="colorTextLightDark">#cdcdd0</color>
+    <color name="colorTextDark">#333333</color>
+    <color name="colorTextEmpty">#787878</color>
+
+    <color name="colorWhiteTranslucent">#DDffffff</color>
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="colorBlack">#000000</color>
+    <color name="colorGray">#555555</color>
+    <color name="colorGrayLight">#ccc</color>
+    <color name="colorGreen">#44b469</color>
+    <color name="colorLightBlue">#dce9f2</color>
+    <color name="colorRed">#de211e</color>
+    <color name="colorRedComplaint">#DB4437</color>
+    <color name="colorRedLight">#BF1E4B</color>
+
+    <color name="checkFilled">#9cb975</color>
+    <color name="checkEmpty">#eeeeee</color>
+    <color name="checkEmptyColor">#999999</color>
+
+    <color name="colorPending">@color/colorPrimary</color>
+    <color name="colorJobDone">@color/colorGreen</color>
+
+    <color name="text_shadow">#7F000000</color>
+</resources>
