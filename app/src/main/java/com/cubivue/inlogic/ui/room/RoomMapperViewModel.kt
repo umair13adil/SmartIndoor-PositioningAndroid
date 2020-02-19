@@ -50,4 +50,8 @@ class RoomMapperViewModel @Inject constructor(
             listOfAccessPoints.postValue(savedAccessPoints)
         }
     }
+
+    fun saveRoomInfo(room: Room){
+        repository.saveRoom(room)
+    }
 }

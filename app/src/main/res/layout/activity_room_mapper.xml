@@ -18,45 +18,55 @@
             style="@style/ButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Access Point 1"
-            android:layout_gravity="top|left"/>
+            android:layout_gravity="top|left"
+            android:text="Access Point 1" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/select_ap_2"
             style="@style/ButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Access Point 2"
-            android:layout_gravity="top|right"/>
+            android:layout_gravity="top|right"
+            android:text="Access Point 2" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/select_ap_3"
             style="@style/ButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Access Point 3"
-            android:layout_gravity="bottom|left"/>
+            android:layout_gravity="bottom|left"
+            android:text="Access Point 3" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/select_ap_4"
             style="@style/ButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Access Point 4"
-            android:layout_gravity="bottom|right"/>
+            android:layout_gravity="bottom|right"
+            android:text="Access Point 4" />
 
         <FrameLayout
-            android:background="@drawable/bg_button_blue"
             android:layout_width="@dimen/margin_10"
             android:layout_height="@dimen/margin_10"
-            android:layout_gravity="center"/>
+            android:layout_gravity="center"
+            android:background="@drawable/bg_button_blue" />
 
         <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/edit_room_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="Enter Room Name"
+            android:layout_gravity="center"
             android:layout_marginTop="@dimen/margin_35"
-            android:layout_gravity="center"/>
+            android:hint="Enter Room Name" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/btn_save_room_info"
+            android:layout_width="@dimen/margin_45"
+            android:layout_height="@dimen/margin_45"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/margin_35"
+            android:layout_marginStart="@dimen/margin_110"
+            android:src="@drawable/ic_done_black_24dp" />
 
     </FrameLayout>
 

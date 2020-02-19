@@ -15,7 +15,7 @@ import com.cubivue.inlogic.model.room.Room
         Room::class,
         AccessPoint::class
     ),
-    version = 1,
+    version = 2,
     exportSchema = false
 )
 abstract class AppDatabase : androidx.room.RoomDatabase() {

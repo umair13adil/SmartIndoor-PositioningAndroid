@@ -1,5 +1,7 @@
 package com.cubivue.inlogic.utils
 
+import android.app.Activity
+import android.widget.Toast
 import com.cubivue.inlogic.model.enums.AccessPointPosition
 
 fun getAccessPointPosition(position: Int): AccessPointPosition {
@@ -10,4 +12,8 @@ fun getAccessPointPosition(position: Int): AccessPointPosition {
         4 -> return AccessPointPosition.ACCESS_POINT_BOTTOM_RIGHT
     }
     return AccessPointPosition.ACCESS_POINT_UNDEFINED
+}
+
+fun Activity.showToast(message: String) {
+    Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
 }

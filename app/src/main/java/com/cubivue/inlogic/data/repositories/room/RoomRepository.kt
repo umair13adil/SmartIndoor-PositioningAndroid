@@ -22,6 +22,7 @@ open class RoomRepository @Inject constructor(
 
     fun saveRoom(room: Room) {
         AppExecutors.instance?.diskIO()?.execute {
+            Log.i(TAG, "saveRoom: Saving room.. ${room.toString()}")
             appDatabase.roomDao().insert(room)
             dataSource.addRoom(room)
         }

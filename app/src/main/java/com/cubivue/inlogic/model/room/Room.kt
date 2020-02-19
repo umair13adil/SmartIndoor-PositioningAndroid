@@ -9,5 +9,9 @@ data class Room(
 
     @PrimaryKey
     var roomId: String,
-    var roomName: String
+    var roomName: String = "",
+    var accessPointTopLeft: String = "",
+    var accessPointTopRight: String = "",
+    var accessPointBottomLeft: String = "",
+    var accessPointBottomRight: String = ""
 )
