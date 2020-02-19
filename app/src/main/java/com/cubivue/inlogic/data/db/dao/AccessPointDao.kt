@@ -14,6 +14,9 @@ interface AccessPointDao {
     @Query("SELECT * FROM accessPoint WHERE id LIKE :id LIMIT 1")
     fun findAccessPointById(id: String): AccessPoint
 
+    @Query("SELECT * FROM accessPoint")
+    fun getAllAccessPoints(): List<AccessPoint>
+
     @Delete
     fun delete(ap: AccessPoint)
 }
