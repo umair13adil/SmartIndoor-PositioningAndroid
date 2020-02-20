@@ -13,5 +13,6 @@ data class Room(
     var accessPointTopLeft: String = "",
     var accessPointTopRight: String = "",
     var accessPointBottomLeft: String = "",
-    var accessPointBottomRight: String = ""
+    var accessPointBottomRight: String = "",
+    var inHere:Boolean = false
 )

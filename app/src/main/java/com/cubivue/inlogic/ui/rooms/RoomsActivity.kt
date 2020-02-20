@@ -40,9 +40,7 @@ class RoomsActivity : DaggerAppCompatActivity() {
 
         setUpListAdapter()
 
-        viewModel.getSavedRooms()
-
-        viewModel.rooms.observe(this, Observer {
+        viewModel.getSavedRooms().observe(this, Observer {
             Log.i(TAG, "Fetched: ${it.size}")
             listOfRooms.clear()
             listOfRooms.addAll(it)

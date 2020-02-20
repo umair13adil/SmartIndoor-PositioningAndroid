@@ -46,13 +46,11 @@ class RoomMapperActivity : DaggerAppCompatActivity(),
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
 
-        viewModel.getAccessPoints()
-
-        viewModel.accessPoints.observe(this, Observer {
+        viewModel.getAccessPoints().observeForever {
             Log.i(TAG, "Fetched: ${it.size}")
             listOfAccessPoints.clear()
             listOfAccessPoints.addAll(it)
-        })
+        }
 
         select_ap_1.setOnClickListener {
             showAccessPointSelectionDialog(AccessPointPosition.ACCESS_POINT_TOP_LEFT)

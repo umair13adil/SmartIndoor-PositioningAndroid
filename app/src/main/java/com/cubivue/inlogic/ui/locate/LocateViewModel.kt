@@ -22,12 +22,7 @@ class LocateViewModel @Inject constructor(
     val rooms: LiveData<List<Room>>
         get() = listOfRooms
 
-    private val listOfAccessPoints = MutableLiveData<List<AccessPoint>>()
-
-    val accessPoints: LiveData<List<AccessPoint>>
-        get() = listOfAccessPoints
-
-    fun getSavedRooms(){
+    fun getSavedRooms() {
         val savedRooms = repository.getSavedRooms()
 
         if (savedRooms.isNullOrEmpty()) {
@@ -42,22 +37,11 @@ class LocateViewModel @Inject constructor(
         }
     }
 
-    fun getAccessPoints() {
-        val savedAccessPoints = repository.getAccessPointsList()
-
-        if (savedAccessPoints.isNullOrEmpty()) {
-            Log.i(TAG, "getAccessPointsList: Fetching from db")
-            repository.appDatabase.accessPointDao().getAllAccessPoints().observeForever {
-                Log.i(TAG, "getAccessPointsList: Fetched from db: ${it.size}")
-                repository.saveAccessPoints(it)
-                listOfAccessPoints.postValue(it)
-            }
-        } else {
-            listOfAccessPoints.postValue(savedAccessPoints)
-        }
+    fun getAccessPoints(): LiveData<List<AccessPoint>> {
+        return repository.appDatabase.accessPointDao().getAllAccessPoints()
     }
 
-    fun locateMe(){
+    fun locateMe() {
 
     }
 }

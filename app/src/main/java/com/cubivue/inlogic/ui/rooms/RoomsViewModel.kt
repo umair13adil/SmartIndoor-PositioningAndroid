@@ -21,22 +21,11 @@ class RoomsViewModel @Inject constructor(
     val rooms: LiveData<List<Room>>
         get() = listOfRooms
 
-    fun getSavedRooms(){
-        val savedRooms = repository.getSavedRooms()
-
-        if (savedRooms.isNullOrEmpty()) {
-            Log.i(TAG, "getSavedRooms: Fetching from db")
-            repository.appDatabase.roomDao().getRooms().observeForever {
-                Log.i(TAG, "getSavedRooms: Fetched from db: ${it.size}")
-                repository.saveRooms(it)
-                listOfRooms.postValue(it)
-            }
-        } else {
-            listOfRooms.postValue(savedRooms)
-        }
+    fun getSavedRooms(): LiveData<List<Room>> {
+        return repository.appDatabase.roomDao().getRooms()
     }
 
-    fun deleteRoom(roomId:String){
+    fun deleteRoom(roomId: String) {
         repository.deleteRoom(roomId)
         getSavedRooms()
     }

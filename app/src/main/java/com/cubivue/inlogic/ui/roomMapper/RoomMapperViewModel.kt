@@ -17,35 +17,19 @@ class RoomMapperViewModel @Inject constructor(
 
     private val TAG = "RoomMapperViewModel"
 
-    private val listOfAccessPoints = MutableLiveData<List<AccessPoint>>()
-
-    val accessPoints: LiveData<List<AccessPoint>>
-        get() = listOfAccessPoints
-
     fun addRoom(room: Room) {
         repository.saveRoom(room)
     }
 
-    fun addAccessPoints(accessPoints: List<AccessPoint>) {
+    private fun addAccessPoints(accessPoints: List<AccessPoint>) {
         repository.saveAccessPoints(accessPoints)
     }
 
-    fun getAccessPoints() {
-        val savedAccessPoints = repository.getAccessPointsList()
-
-        if (savedAccessPoints.isNullOrEmpty()) {
-            Log.i(TAG, "getAccessPointsList: Fetching from db")
-            repository.appDatabase.accessPointDao().getAllAccessPoints().observeForever {
-                Log.i(TAG, "getAccessPointsList: Fetched from db: ${it.size}")
-                repository.saveAccessPoints(it)
-                listOfAccessPoints.postValue(it)
-            }
-        } else {
-            listOfAccessPoints.postValue(savedAccessPoints)
-        }
+    fun getAccessPoints(): LiveData<List<AccessPoint>> {
+        return repository.appDatabase.accessPointDao().getAllAccessPoints()
     }
 
-    fun saveRoomInfo(room: Room){
+    fun saveRoomInfo(room: Room) {
         repository.saveRoom(room)
     }
 }

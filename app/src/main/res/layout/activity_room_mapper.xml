@@ -16,33 +16,37 @@
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/select_ap_1"
             style="@style/ButtonStyle"
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/margin_150"
             android:layout_height="wrap_content"
             android:layout_gravity="top|left"
+            android:ellipsize="end"
             android:text="Access Point 1" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/select_ap_2"
             style="@style/ButtonStyle"
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/margin_150"
             android:layout_height="wrap_content"
             android:layout_gravity="top|right"
+            android:ellipsize="end"
             android:text="Access Point 2" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/select_ap_3"
             style="@style/ButtonStyle"
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/margin_150"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|left"
+            android:ellipsize="end"
             android:text="Access Point 3" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/select_ap_4"
             style="@style/ButtonStyle"
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/margin_150"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|right"
+            android:ellipsize="end"
             android:text="Access Point 4" />
 
         <FrameLayout

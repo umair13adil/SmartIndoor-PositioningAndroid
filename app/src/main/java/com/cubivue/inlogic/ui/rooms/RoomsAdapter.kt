@@ -23,7 +23,7 @@ class RoomDiffCallback : DiffUtil.ItemCallback<Room>() {
     }
 }
 
-class RoomsAdapter(val onConfirmDelete: (id: String) -> Unit? = null!!) :
+class RoomsAdapter(val onConfirmDelete: (id: String) -> Unit) :
     ListAdapter<Room, RoomsAdapter.ViewHolder>(
         RoomDiffCallback()
     ) {
@@ -52,7 +52,7 @@ class RoomsAdapter(val onConfirmDelete: (id: String) -> Unit? = null!!) :
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         @SuppressLint("SetTextI18n")
-        fun bind(item: Room, onConfirmDelete: (id: String) -> Unit?) {
+        fun bind(item: Room, onConfirmDelete: (id: String) -> Unit) {
 
             itemView.ap_1.text = "1. ${item.accessPointTopLeft}"
             itemView.ap_2.text = "2. ${item.accessPointTopRight}"
@@ -67,6 +67,12 @@ class RoomsAdapter(val onConfirmDelete: (id: String) -> Unit? = null!!) :
 
             itemView.btn_delete.setOnClickListener {
                 onConfirmDelete.invoke(item.roomId)
+            }
+
+            if (item.inHere) {
+                itemView.img_person_indicator.visibility = View.VISIBLE
+            } else {
+                itemView.img_person_indicator.visibility = View.GONE
             }
         }
     }

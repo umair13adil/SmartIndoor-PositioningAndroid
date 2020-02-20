@@ -40,11 +40,11 @@ class LocateActivity : DaggerAppCompatActivity() {
 
         setUpListAdapter()
 
-        viewModel.getAccessPoints()
+        //viewModel.getAccessPoints()
         viewModel.getSavedRooms()
 
         viewModel.rooms.observe(this, Observer {
-            Log.i(TAG, "Fetched: ${it.size}")
+            Log.i(TAG, "Fetched Rooms: ${it.size}")
             listOfRooms.clear()
             listOfRooms.addAll(it)
 
@@ -52,22 +52,26 @@ class LocateActivity : DaggerAppCompatActivity() {
             adapter.notifyDataSetChanged()
         })
 
-        viewModel.accessPoints.observe(this, Observer {
-            Log.i(TAG, "Fetched: ${it.size}")
+        viewModel.getAccessPoints().observeForever {
+            Log.i(TAG, "Fetched Access Points: ${it.size}")
             viewModel.locateMe()
-        })
+        }
     }
 
     /*
     * Setup RecyclerView list adapter.
     */
     private fun setUpListAdapter() {
-        adapter = RoomsAdapter()
+        adapter = RoomsAdapter(::onDeleteSelection)
 
         layoutManager = GridLayoutManager(this, 2)
 
         list_rooms.layoutManager = layoutManager
         list_rooms.adapter = adapter
+    }
+
+    fun onDeleteSelection(id:String){
+
     }
 
     override fun onSupportNavigateUp(): Boolean {
