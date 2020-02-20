@@ -1,9 +1,8 @@
-package com.cubivue.inlogic.ui.room
+package com.cubivue.inlogic.ui.roomMapper
 
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.widget.AppCompatButton
-import androidx.appcompat.widget.AppCompatTextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -43,6 +42,9 @@ class RoomMapperActivity : DaggerAppCompatActivity(),
             ViewModelProviders.of(this, viewModelFactory).get(RoomMapperViewModel::class.java)
 
         setContentView(R.layout.activity_room_mapper)
+
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
 
         viewModel.getAccessPoints()
 
@@ -130,5 +132,10 @@ class RoomMapperActivity : DaggerAppCompatActivity(),
 
     private fun saveAccessPointInfo(textView: AppCompatButton, name: String) {
         textView.text = name
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 }

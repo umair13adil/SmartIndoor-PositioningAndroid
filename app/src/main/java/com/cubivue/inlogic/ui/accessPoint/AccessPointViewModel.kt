@@ -5,7 +5,6 @@ import android.net.wifi.ScanResult
 import androidx.lifecycle.ViewModel
 import com.cubivue.inlogic.data.repositories.accessPoint.AccessPointRepository
 import com.cubivue.inlogic.model.accessPoint.AccessPoint
-import com.cubivue.inlogic.model.accessPoint.AccessPointActivityData
 import com.cubivue.inlogic.model.room.Room
 import javax.inject.Inject
 
@@ -22,12 +21,8 @@ class AccessPointViewModel @Inject constructor(
         repository.saveRoom(room)
     }
 
-    fun saveAccessPoints(accessPoints: List<AccessPoint>) {
+    private fun saveAccessPoints(accessPoints: List<AccessPoint>) {
         repository.saveAccessPoints(accessPoints)
-    }
-
-    fun getMainData(): AccessPointActivityData? {
-        return repository.getMainScreenData()
     }
 
     private fun addAccessPointInfo(res: ScanResult) {

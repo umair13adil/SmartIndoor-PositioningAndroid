@@ -1,6 +1,5 @@
 package com.cubivue.inlogic.data.repositories.accessPoint
 
-import com.cubivue.inlogic.model.accessPoint.AccessPointActivityData
 import com.cubivue.inlogic.model.accessPoint.AccessPoint
 import com.cubivue.inlogic.model.room.Room
 
@@ -10,13 +9,6 @@ object AccessPointActivityDataSource :
 
     private var listOfRooms = arrayListOf<Room>()
     private var listOfAccessPoints = arrayListOf<AccessPoint>()
-
-    override fun getAccessPointData(): AccessPointActivityData? {
-        return AccessPointActivityData(
-            listOfRooms,
-            listOfAccessPoints
-        )
-    }
 
     override fun addRoom(room: Room) {
         listOfRooms.add(room)

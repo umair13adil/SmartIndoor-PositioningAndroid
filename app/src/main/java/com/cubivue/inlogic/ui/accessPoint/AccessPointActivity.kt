@@ -3,10 +3,8 @@ package com.cubivue.inlogic.ui.accessPoint
 import android.content.Intent
 import android.net.wifi.ScanResult
 import android.os.Bundle
-import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.cubivue.inlogic.model.accessPoint.AccessPoint
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_access_points.*
 import android.Manifest.permission.ACCESS_COARSE_LOCATION
 import androidx.core.app.ActivityCompat
 import android.content.pm.PackageManager
@@ -15,7 +13,8 @@ import android.os.Build
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import com.cubivue.inlogic.R
-import com.cubivue.inlogic.ui.room.RoomMapperActivity
+import com.cubivue.inlogic.ui.roomMapper.RoomMapperActivity
+import com.cubivue.inlogic.ui.rooms.RoomsActivity
 import com.cubivue.inlogic.utils.WiFiScannerHelper
 import dagger.android.support.DaggerAppCompatActivity
 import javax.inject.Inject
@@ -43,7 +42,7 @@ open class AccessPointActivity() : DaggerAppCompatActivity() {
         viewModel =
             ViewModelProviders.of(this, viewModelFactory).get(AccessPointViewModel::class.java)
 
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_access_points)
 
         setUpListAdapter()
 
@@ -54,6 +53,10 @@ open class AccessPointActivity() : DaggerAppCompatActivity() {
 
         btn_room_mapper.setOnClickListener {
             startActivity(Intent(this, RoomMapperActivity::class.java))
+        }
+
+        btn_show_rooms.setOnClickListener {
+            startActivity(Intent(this, RoomsActivity::class.java))
         }
     }
 

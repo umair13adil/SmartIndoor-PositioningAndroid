@@ -12,7 +12,15 @@
         style="@style/ButtonStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Room Mapper"
+        android:text="Add New Room"
+        android:layout_margin="@dimen/margin_10"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_show_rooms"
+        style="@style/ButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Show Rooms"
         android:layout_margin="@dimen/margin_10"/>
 
     <androidx.recyclerview.widget.RecyclerView

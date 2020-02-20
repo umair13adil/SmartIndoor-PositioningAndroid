@@ -1,13 +1,10 @@
 package com.cubivue.inlogic.data.repositories.room
 
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.Observer
 import com.cubivue.inlogic.data.db.AppDatabase
 import com.cubivue.inlogic.data.db.AppExecutors
 import com.cubivue.inlogic.model.accessPoint.AccessPoint
 import com.cubivue.inlogic.model.room.Room
-import com.cubivue.inlogic.model.room.RoomMapperActivityData
 import javax.inject.Inject
 import javax.inject.Named
 import javax.inject.Singleton
@@ -20,16 +17,16 @@ open class RoomRepository @Inject constructor(
 
     private val TAG = "RoomRepository"
 
+    fun saveRooms(rooms: List<Room>) {
+        dataSource.addRooms(rooms)
+    }
+
     fun saveRoom(room: Room) {
         AppExecutors.instance?.diskIO()?.execute {
             Log.i(TAG, "saveRoom: Saving room.. ${room.toString()}")
             appDatabase.roomDao().insert(room)
             dataSource.addRoom(room)
         }
-    }
-
-    fun getRoomsData(): RoomMapperActivityData? {
-        return dataSource.getRoomsData()
     }
 
     fun saveAccessPoints(accessPoints: List<AccessPoint>) {
@@ -39,5 +36,9 @@ open class RoomRepository @Inject constructor(
     fun getAccessPointsList(): List<AccessPoint> {
         Log.i(TAG, "getAccessPointsList: Fetching from cache")
         return dataSource.getAccessPoints()
+    }
+
+    fun getSavedRooms(): List<Room>? {
+        return dataSource.getRoomsData()
     }
 }

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/margin_300"
+    android:orientation="vertical"
+    tools:context=".ui.roomMapper.RoomMapperActivity">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txt_room_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_10"
+        android:gravity="center"
+        android:text="Room Name" />
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/margin_10"
+        android:background="@drawable/bg_dotted_box"
+        android:padding="@dimen/margin_10">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/ap_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top|left"
+            android:ellipsize="end"
+            android:maxLength="10"
+            android:text="AP 1"
+            android:textStyle="bold" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/ap_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top|right"
+            android:ellipsize="end"
+            android:maxLength="10"
+            android:text="AP 2"
+            android:textStyle="bold"
+            android:layout_marginTop="@dimen/margin_25"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/ap_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|left"
+            android:ellipsize="end"
+            android:text="AP 3"
+            android:textStyle="bold"
+            android:layout_marginBottom="@dimen/margin_25"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/ap_4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
+            android:ellipsize="end"
+            android:text="AP 4"
+            android:textStyle="bold"/>
+
+    </FrameLayout>
+</LinearLayout>

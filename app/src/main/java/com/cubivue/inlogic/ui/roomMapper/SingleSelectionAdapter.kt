@@ -1,6 +1,5 @@
-package com.cubivue.inlogic.ui.room
+package com.cubivue.inlogic.ui.roomMapper
 
-import android.net.wifi.ScanResult
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup

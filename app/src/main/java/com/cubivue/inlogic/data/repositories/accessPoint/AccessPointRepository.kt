@@ -4,7 +4,6 @@ import android.util.Log
 import com.cubivue.inlogic.data.db.AppDatabase
 import com.cubivue.inlogic.data.db.AppExecutors
 import com.cubivue.inlogic.model.accessPoint.AccessPoint
-import com.cubivue.inlogic.model.accessPoint.AccessPointActivityData
 import com.cubivue.inlogic.model.room.Room
 import javax.inject.Inject
 import javax.inject.Named
@@ -37,9 +36,5 @@ open class AccessPointRepository @Inject constructor(
                 accessPoints
             )
         }
-    }
-
-    fun getMainScreenData(): AccessPointActivityData? {
-        return AccessPointActivityDataSource.getAccessPointData()
     }
 }

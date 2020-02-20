@@ -1,4 +1,4 @@
-package com.cubivue.inlogic.ui.room
+package com.cubivue.inlogic.ui.roomMapper
 
 import androidx.lifecycle.ViewModel
 import com.cubivue.inlogic.di.ViewModelKey

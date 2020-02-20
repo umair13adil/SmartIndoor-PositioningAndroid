@@ -1,5 +1,6 @@
 package com.cubivue.inlogic.data.db.dao
 
+import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.cubivue.inlogic.model.room.Room
 import com.cubivue.inlogic.model.room.RoomAccessPoints
@@ -18,6 +19,9 @@ interface RoomDao {
     @Transaction
     @Query("SELECT * FROM room")
     fun getRoomsAndAccessPoints(): List<RoomAccessPoints>
+
+    @Query("SELECT * FROM room")
+    fun getRooms(): LiveData<List<Room>>
 
     @Query("SELECT * FROM room WHERE roomId LIKE :roomId LIMIT 1")
     fun findRoomById(roomId: String): Room

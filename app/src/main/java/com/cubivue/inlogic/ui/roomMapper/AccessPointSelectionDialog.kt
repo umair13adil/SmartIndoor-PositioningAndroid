@@ -1,4 +1,4 @@
-package com.cubivue.inlogic.ui.room
+package com.cubivue.inlogic.ui.roomMapper
 
 import android.os.Bundle
 import android.util.Log
