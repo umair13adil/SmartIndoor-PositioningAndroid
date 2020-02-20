@@ -13,6 +13,7 @@ import android.os.Build
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import com.cubivue.inlogic.R
+import com.cubivue.inlogic.ui.locate.LocateActivity
 import com.cubivue.inlogic.ui.roomMapper.RoomMapperActivity
 import com.cubivue.inlogic.ui.rooms.RoomsActivity
 import com.cubivue.inlogic.utils.WiFiScannerHelper
@@ -57,6 +58,10 @@ open class AccessPointActivity() : DaggerAppCompatActivity() {
 
         btn_show_rooms.setOnClickListener {
             startActivity(Intent(this, RoomsActivity::class.java))
+        }
+
+        btn_locate_me.setOnClickListener {
+            startActivity(Intent(this, LocateActivity::class.java))
         }
     }
 

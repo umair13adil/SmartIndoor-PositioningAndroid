@@ -18,6 +18,8 @@ package com.cubivue.inlogic.di
 
 import com.cubivue.inlogic.ui.accessPoint.AccessPointActivity
 import com.cubivue.inlogic.ui.accessPoint.AccessPointActivityModule
+import com.cubivue.inlogic.ui.locate.LocateActivity
+import com.cubivue.inlogic.ui.locate.LocateActivityModule
 import com.cubivue.inlogic.ui.roomMapper.RoomMapperActivity
 import com.cubivue.inlogic.ui.roomMapper.RoomMapperActivityModule
 import com.cubivue.inlogic.ui.rooms.RoomsActivity
@@ -64,4 +66,13 @@ abstract class ActivityBindingModule {
         ]
     )
     internal abstract fun roomsActivity(): RoomsActivity
+
+    @ActivityScoped
+    @ContributesAndroidInjector(
+        modules = [
+            // activity
+            LocateActivityModule::class
+        ]
+    )
+    internal abstract fun locateActivity(): LocateActivity
 }

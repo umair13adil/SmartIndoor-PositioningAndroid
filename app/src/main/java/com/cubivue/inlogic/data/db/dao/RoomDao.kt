@@ -26,6 +26,6 @@ interface RoomDao {
     @Query("SELECT * FROM room WHERE roomId LIKE :roomId LIMIT 1")
     fun findRoomById(roomId: String): Room
 
-    @Delete
-    fun delete(room: Room)
+    @Query("DELETE FROM room WHERE roomId = :roomId")
+    fun delete(roomId: String)
 }

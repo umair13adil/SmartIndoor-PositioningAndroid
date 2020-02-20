@@ -30,4 +30,14 @@ object RoomMapperActivityDataSource : RoomDataSource {
     override fun getRoomsData(): List<Room>? {
         return listOfRooms
     }
+
+    override fun deleteRoom(roomId: String) {
+        listOfRooms.filter {
+            it.roomId == roomId
+        }.let {
+            if (it.isNotEmpty()) {
+                listOfRooms.removeAll(it)
+            }
+        }
+    }
 }

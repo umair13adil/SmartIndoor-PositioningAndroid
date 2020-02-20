@@ -25,6 +25,10 @@
             android:screenOrientation="portrait"></activity>
 
         <activity
+            android:name=".ui.locate.LocateActivity"
+            android:screenOrientation="portrait"></activity>
+
+        <activity
             android:name="com.cubivue.inlogic.ui.accessPoint.AccessPointActivity"
             android:screenOrientation="portrait">
             <intent-filter>

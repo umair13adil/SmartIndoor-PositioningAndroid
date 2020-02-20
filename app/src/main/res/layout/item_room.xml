@@ -7,6 +7,14 @@
     android:orientation="vertical"
     tools:context=".ui.roomMapper.RoomMapperActivity">
 
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/btn_delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_delete_forever_black_24dp"
+        android:layout_gravity="end"
+        android:visibility="gone"/>
+
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/txt_room_name"
         android:layout_width="match_parent"

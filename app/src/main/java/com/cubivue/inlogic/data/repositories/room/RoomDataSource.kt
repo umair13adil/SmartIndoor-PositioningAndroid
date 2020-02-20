@@ -14,4 +14,6 @@ interface RoomDataSource {
     fun addAccessPoints(accessPoints: List<AccessPoint>)
 
     fun addRooms(rooms: List<Room>)
+
+    fun deleteRoom(roomId:String)
 }

@@ -41,4 +41,13 @@ open class RoomRepository @Inject constructor(
     fun getSavedRooms(): List<Room>? {
         return dataSource.getRoomsData()
     }
+
+    fun deleteRoom(roomId:String){
+        dataSource.deleteRoom(roomId)
+
+        AppExecutors.instance?.diskIO()?.execute {
+            Log.i(TAG, "deleteRoom: Deleting room.. $roomId")
+            appDatabase.roomDao().delete(roomId)
+        }
+    }
 }

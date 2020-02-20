@@ -1,4 +1,4 @@
-package com.cubivue.inlogic.ui.rooms
+package com.cubivue.inlogic.ui.locate
 
 import android.os.Bundle
 import android.util.Log
@@ -8,19 +8,19 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import com.cubivue.inlogic.R
 import com.cubivue.inlogic.model.room.Room
+import com.cubivue.inlogic.ui.rooms.RoomsAdapter
 import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_rooms.*
 import javax.inject.Inject
 
+class LocateActivity : DaggerAppCompatActivity() {
 
-class RoomsActivity : DaggerAppCompatActivity() {
-
-    private val TAG = "RoomsActivity"
+    private val TAG = "LocateActivity"
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
-    private lateinit var viewModel: RoomsViewModel
+    private lateinit var viewModel: LocateViewModel
     private var listOfRooms = arrayListOf<Room>()
 
     //List
@@ -31,7 +31,7 @@ class RoomsActivity : DaggerAppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         viewModel =
-            ViewModelProviders.of(this, viewModelFactory).get(RoomsViewModel::class.java)
+            ViewModelProviders.of(this, viewModelFactory).get(LocateViewModel::class.java)
 
         setContentView(R.layout.activity_rooms)
 
@@ -40,6 +40,7 @@ class RoomsActivity : DaggerAppCompatActivity() {
 
         setUpListAdapter()
 
+        viewModel.getAccessPoints()
         viewModel.getSavedRooms()
 
         viewModel.rooms.observe(this, Observer {
@@ -50,23 +51,23 @@ class RoomsActivity : DaggerAppCompatActivity() {
             adapter.submitList(listOfRooms)
             adapter.notifyDataSetChanged()
         })
+
+        viewModel.accessPoints.observe(this, Observer {
+            Log.i(TAG, "Fetched: ${it.size}")
+            viewModel.locateMe()
+        })
     }
 
     /*
     * Setup RecyclerView list adapter.
     */
     private fun setUpListAdapter() {
-        adapter = RoomsAdapter(::onConfirmDelete)
+        adapter = RoomsAdapter()
 
         layoutManager = GridLayoutManager(this, 2)
 
         list_rooms.layoutManager = layoutManager
         list_rooms.adapter = adapter
-    }
-
-    private fun onConfirmDelete(roomId: String) {
-        Log.i(TAG, "onConfirmDelete: $roomId")
-        viewModel.deleteRoom(roomId)
     }
 
     override fun onSupportNavigateUp(): Boolean {

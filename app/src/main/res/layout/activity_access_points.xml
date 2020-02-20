@@ -23,6 +23,14 @@
         android:text="Show Rooms"
         android:layout_margin="@dimen/margin_10"/>
 
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_locate_me"
+        style="@style/ButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Locate Me"
+        android:layout_margin="@dimen/margin_10"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/list_access_points"
         style="@style/scrollbarStyleVertical"
