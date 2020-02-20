@@ -1,5 +1,6 @@
 package com.cubivue.inlogic.ui.accessPoint
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,6 +9,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.cubivue.inlogic.R
 import com.cubivue.inlogic.model.accessPoint.AccessPoint
+import com.cubivue.inlogic.model.enums.SignalStrengths
 import com.cubivue.inlogic.utils.DateTimeUtils
 import kotlinx.android.synthetic.main.item_access_points.view.*
 
@@ -51,11 +53,13 @@ class AccessPointsAdapter :
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
+        @SuppressLint("SetTextI18n")
         fun bind(item: AccessPoint) {
 
             itemView.txt_access_point_name.text = item.name
-            itemView.txt_scan_time.text = DateTimeUtils.getReadableTime(item.scanTime)
-            itemView.txt_strength.text = item.strength.toString()
+            //itemView.txt_scan_time.text = DateTimeUtils.getReadableTime(item.scanTime)
+            itemView.txt_strength.text =
+                "${SignalStrengths.getRouterLocations(item.strength)} (${item.strength})"
         }
     }
 }

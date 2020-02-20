@@ -56,6 +56,20 @@ class LocateActivity : DaggerAppCompatActivity() {
             Log.i(TAG, "Fetched Access Points: ${it.size}")
             viewModel.locateMe()
         }
+
+        viewModel.isInRoom.observeForever { result ->
+
+            listOfRooms.filter {
+                it.roomId == result.first.roomId
+            }.let {
+                it.map {
+                    it.inHere = result.second
+                }
+            }
+
+            adapter.submitList(listOfRooms)
+            adapter.notifyDataSetChanged()
+        }
     }
 
     /*
@@ -70,7 +84,7 @@ class LocateActivity : DaggerAppCompatActivity() {
         list_rooms.adapter = adapter
     }
 
-    fun onDeleteSelection(id:String){
+    private fun onDeleteSelection(id: String) {
 
     }
 

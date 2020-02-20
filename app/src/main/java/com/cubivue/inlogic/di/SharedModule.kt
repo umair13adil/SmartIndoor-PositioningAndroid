@@ -5,6 +5,7 @@ import com.cubivue.inlogic.data.repositories.accessPoint.AccessPointActivityData
 import com.cubivue.inlogic.data.repositories.accessPoint.AccessPointRepository
 import com.cubivue.inlogic.data.repositories.room.RoomMapperActivityDataSource
 import com.cubivue.inlogic.data.repositories.room.RoomRepository
+import com.cubivue.inlogic.utils.InDoorLocationHelper
 import dagger.Module
 import dagger.Provides
 import javax.inject.Named
@@ -49,5 +50,11 @@ class SharedModule {
             dataSource,
             appDatabase
         )
+    }
+
+    @Singleton
+    @Provides
+    fun provideInDoorLocationHelper(appDatabase: AppDatabase): InDoorLocationHelper {
+        return InDoorLocationHelper(appDatabase)
     }
 }

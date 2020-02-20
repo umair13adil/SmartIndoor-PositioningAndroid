@@ -18,15 +18,18 @@
 
         <activity
             android:name="com.cubivue.inlogic.ui.roomMapper.RoomMapperActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait"
+            android:label="Room Mapper"></activity>
 
         <activity
             android:name=".ui.rooms.RoomsActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait"
+            android:label="My Rooms"></activity>
 
         <activity
             android:name=".ui.locate.LocateActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait"
+            android:label="My Location"></activity>
 
         <activity
             android:name="com.cubivue.inlogic.ui.accessPoint.AccessPointActivity"
