@@ -6,6 +6,9 @@ import android.content.Intent
 
 import com.embrace.plog.pLogs.PLog
 import com.embrace.plog.pLogs.models.LogLevel
+import androidx.core.content.ContextCompat.startForegroundService
+import android.os.Build
+
 
 class AlarmReceiver : BroadcastReceiver() {
 
@@ -16,7 +19,11 @@ class AlarmReceiver : BroadcastReceiver() {
 
         if (intent.action != null) {
             if (intent.action == alarmIntent) {
-                context.startService(Intent(context, ScannerService::class.java))
+                if (Build.VERSION.SDK_INT > 25) {
+                    startForegroundService(context, Intent(context, ScannerService::class.java))
+                } else {
+                    context.startService(Intent(context, ScannerService::class.java))
+                }
             }
         }
     }
