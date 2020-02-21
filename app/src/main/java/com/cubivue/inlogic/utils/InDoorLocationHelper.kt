@@ -15,9 +15,9 @@ import javax.inject.Singleton
 open class InDoorLocationHelper @Inject constructor(val appDatabase: AppDatabase) {
 
     private val TAG = "InDoorLocationHelper"
-    private var lastResult = ""
 
     fun isInTheRoom(room: Room): Observable<Pair<Boolean, String>> {
+        var lastResult = ""
 
         return Observables.combineLatest(
             getSignalStrengthOfAccessPoint(room.accessPointTopLeft),
