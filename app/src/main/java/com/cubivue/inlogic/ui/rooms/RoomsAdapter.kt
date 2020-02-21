@@ -77,7 +77,8 @@ class RoomsAdapter(val onConfirmDelete: (id: String) -> Unit, var isSimpleList: 
             }
 
             if (isSimpleList) {
-                itemView.txt_assessment.visibility = View.INVISIBLE
+                itemView.txt_assessment.visibility = View.GONE
+                itemView.img_person_indicator.visibility = View.GONE
             } else {
                 itemView.txt_assessment.visibility = View.VISIBLE
             }

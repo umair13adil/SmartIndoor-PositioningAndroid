@@ -15,6 +15,7 @@ import javax.inject.Singleton
 open class InDoorLocationHelper @Inject constructor(val appDatabase: AppDatabase) {
 
     private val TAG = "InDoorLocationHelper"
+    private var lastResult = ""
 
     fun isInTheRoom(room: Room): Observable<Pair<Boolean, String>> {
 
@@ -37,7 +38,7 @@ open class InDoorLocationHelper @Inject constructor(val appDatabase: AppDatabase
                 location
             }
 
-            //PLog.logThis(TAG, "isInTheRoom", "${room.roomName}: $locations")
+            //PLog.logThis(TAG, "assessments", "${room.roomName}: $locations")
             return@flatMap Observable.just(locations)
         }.flatMap {
             var count = 0
@@ -48,7 +49,18 @@ open class InDoorLocationHelper @Inject constructor(val appDatabase: AppDatabase
                 }
             }
 
-            return@flatMap Observable.just(Pair(count >= 3, it.joinToString(",")))
+            val result = Pair(count >= 3, it.joinToString(","))
+            if (result.first) {
+                val newResult = "${room.roomName}: ${result.first}"
+
+                if (lastResult.isEmpty() || lastResult != newResult) {
+                    PLog.logThis(TAG, "isInTheRoom", newResult)
+                }
+
+                lastResult = "${room.roomName}: ${result.first}"
+            }
+
+            return@flatMap Observable.just(result)
         }
     }
 

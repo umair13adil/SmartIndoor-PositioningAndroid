@@ -31,6 +31,7 @@ class WiFiScannerHelper(val doOnResults: (results: List<ScanResult>) -> Unit) {
     }
 
     fun setupWifiManager(applicationContext: Context, context: Context) {
+        PLog.logThis(TAG,"setupWifiManager","Wi-Fi Scanner is started.")
         wifiManager =
             applicationContext.applicationContext?.getSystemService(Context.WIFI_SERVICE) as WifiManager
 

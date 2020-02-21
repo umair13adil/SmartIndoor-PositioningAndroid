@@ -28,7 +28,8 @@
             android:gravity="center"
             android:layout_gravity="center"
             android:textStyle="bold"
-            android:text="Room Name" />
+            android:text="Room Name"
+            android:layout_marginBottom="@dimen/margin_4"/>
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/img_person_indicator"

@@ -50,8 +50,6 @@ open class AccessPointActivity() : DaggerAppCompatActivity() {
 
         setUpListAdapter()
 
-        getStoragePermissions()
-
         btn_room_mapper.setOnClickListener {
             startActivity(Intent(this, RoomMapperActivity::class.java))
         }
@@ -163,6 +161,16 @@ open class AccessPointActivity() : DaggerAppCompatActivity() {
                 }
             }
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        getStoragePermissions()
+    }
+
+    override fun onPause() {
+        wiFiScannerHelper.unregisterReceiver(this)
+        super.onPause()
     }
 
     override fun onDestroy() {

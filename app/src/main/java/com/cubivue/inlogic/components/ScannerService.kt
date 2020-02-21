@@ -57,7 +57,6 @@ class ScannerService : Service() {
     private fun doOnResults(results: List<ScanResult>) {
         wiFiScannerHelper.unregisterReceiver(this)
 
-        PLog.logThis(TAG, "doOnResults", "Received.")
         val accessPoints = arrayListOf<AccessPoint>()
 
         results.forEach { res ->
@@ -74,11 +73,9 @@ class ScannerService : Service() {
         if(results.isNotEmpty()) {
             AppExecutors.instance?.diskIO()?.execute {
                 appDatabase.accessPointDao().insertAll(accessPoints)
-                PLog.logThis(TAG, "doOnResults", "AccessPoints Updated.")
 
                 AppExecutors.instance?.diskIO()?.execute {
                     val listOfRooms = appDatabase.roomDao().getSavedRooms()
-                    PLog.logThis(TAG, "doOnResults", "Rooms Fetched: ${listOfRooms.size}")
 
                     if (listOfRooms.isNotEmpty()) {
                         listOfRooms.forEach { room ->
