@@ -23,7 +23,7 @@ class RoomDiffCallback : DiffUtil.ItemCallback<Room>() {
     }
 }
 
-class RoomsAdapter(val onConfirmDelete: (id: String) -> Unit) :
+class RoomsAdapter(val onConfirmDelete: (id: String) -> Unit, var isSimpleList: Boolean = true) :
     ListAdapter<Room, RoomsAdapter.ViewHolder>(
         RoomDiffCallback()
     ) {
@@ -44,7 +44,7 @@ class RoomsAdapter(val onConfirmDelete: (id: String) -> Unit) :
         val pin = getItem(position)
 
         holder.apply {
-            bind(pin, onConfirmDelete)
+            bind(pin, onConfirmDelete, isSimpleList)
             itemView.tag = pin
         }
     }
@@ -52,13 +52,14 @@ class RoomsAdapter(val onConfirmDelete: (id: String) -> Unit) :
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         @SuppressLint("SetTextI18n")
-        fun bind(item: Room, onConfirmDelete: (id: String) -> Unit) {
+        fun bind(item: Room, onConfirmDelete: (id: String) -> Unit, isSimpleList: Boolean) {
 
             itemView.ap_1.text = "1. ${item.accessPointTopLeft}"
             itemView.ap_2.text = "2. ${item.accessPointTopRight}"
             itemView.ap_3.text = "3. ${item.accessPointBottomLeft}"
             itemView.ap_4.text = "4. ${item.accessPointBottomRight}"
             itemView.txt_room_name.text = item.roomName
+            itemView.txt_assessment.text = item.assessment
 
             itemView.setOnLongClickListener {
                 itemView.btn_delete.visibility = View.VISIBLE
@@ -72,7 +73,13 @@ class RoomsAdapter(val onConfirmDelete: (id: String) -> Unit) :
             if (item.inHere) {
                 itemView.img_person_indicator.visibility = View.VISIBLE
             } else {
-                itemView.img_person_indicator.visibility = View.GONE
+                itemView.img_person_indicator.visibility = View.INVISIBLE
+            }
+
+            if (isSimpleList) {
+                itemView.txt_assessment.visibility = View.INVISIBLE
+            } else {
+                itemView.txt_assessment.visibility = View.VISIBLE
             }
         }
     }

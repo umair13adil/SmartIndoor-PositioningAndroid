@@ -11,18 +11,43 @@
         android:id="@+id/btn_delete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_delete_forever_black_24dp"
         android:layout_gravity="end"
-        android:visibility="gone"/>
+        android:src="@drawable/ic_delete_forever_black_24dp"
+        android:visibility="gone" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txt_room_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_10"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:textStyle="bold"
+            android:text="Room Name" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/img_person_indicator"
+            android:layout_width="@dimen/margin_35"
+            android:layout_height="@dimen/margin_35"
+            android:layout_gravity="end"
+            android:src="@drawable/ic_person_pin_black_24dp"
+            android:visibility="invisible" />
+    </FrameLayout>
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/txt_room_name"
+        android:id="@+id/txt_assessment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_10"
         android:gravity="center"
-        android:text="Room Name" />
-
+        android:textSize="@dimen/txt_size_12"
+        android:textStyle="bold"
+        android:text="Assessments" />
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -30,14 +55,6 @@
         android:layout_margin="@dimen/margin_10"
         android:background="@drawable/bg_dotted_box"
         android:padding="@dimen/margin_10">
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/img_person_indicator"
-            android:layout_width="@dimen/margin_35"
-            android:layout_height="@dimen/margin_35"
-            android:src="@drawable/ic_person_pin_black_24dp"
-            android:layout_gravity="center"
-            android:visibility="gone"/>
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/ap_1"
@@ -52,28 +69,29 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="top|right"
-            android:text="AP 2"
+            android:layout_marginTop="@dimen/margin_45"
             android:gravity="end"
-            android:textStyle="bold"
-            android:layout_marginTop="@dimen/margin_45"/>
+            android:text="AP 2"
+            android:textStyle="bold" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/ap_3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|left"
+            android:layout_marginBottom="@dimen/margin_55"
+            android:gravity="start"
             android:text="AP 3"
-            android:textStyle="bold"
-            android:gravity="end"
-            android:layout_marginBottom="@dimen/margin_55"/>
+            android:textStyle="bold" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/ap_4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|right"
+            android:gravity="end"
             android:text="AP 4"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
 
     </FrameLayout>
 </LinearLayout>

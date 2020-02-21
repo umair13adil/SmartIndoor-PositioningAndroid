@@ -23,6 +23,9 @@ interface RoomDao {
     @Query("SELECT * FROM room")
     fun getRooms(): LiveData<List<Room>>
 
+    @Query("SELECT * FROM room")
+    fun getSavedRooms(): List<Room>
+
     @Query("SELECT * FROM room WHERE roomId LIKE :roomId LIMIT 1")
     fun findRoomById(roomId: String): Room
 

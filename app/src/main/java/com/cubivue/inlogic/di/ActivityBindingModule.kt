@@ -16,6 +16,7 @@
 
 package com.cubivue.inlogic.di
 
+import com.cubivue.inlogic.components.ScannerService
 import com.cubivue.inlogic.ui.accessPoint.AccessPointActivity
 import com.cubivue.inlogic.ui.accessPoint.AccessPointActivityModule
 import com.cubivue.inlogic.ui.locate.LocateActivity
@@ -75,4 +76,8 @@ abstract class ActivityBindingModule {
         ]
     )
     internal abstract fun locateActivity(): LocateActivity
+
+
+    @ContributesAndroidInjector
+    abstract fun scannerService(): ScannerService
 }

@@ -26,21 +26,21 @@ class LocateViewModel @Inject constructor(
     private val TAG = "LocateViewModel"
 
     private val listOfRooms = MutableLiveData<List<Room>>()
-    private val isInRoomResult = MutableLiveData<Pair<Room, Boolean>>()
+    private val isInRoomResult = MutableLiveData<Pair<Room, Pair<Boolean, String>>>()
 
     val rooms: LiveData<List<Room>>
         get() = listOfRooms
 
-    val isInRoom: LiveData<Pair<Room, Boolean>>
+    val isInRoom: LiveData<Pair<Room, Pair<Boolean, String>>>
         get() = isInRoomResult
 
     fun getSavedRooms() {
         val savedRooms = repository.getSavedRooms()
 
         if (savedRooms.isNullOrEmpty()) {
-            PLog.logThis(TAG, "getSavedRooms","Fetching from db")
+            PLog.logThis(TAG, "getSavedRooms", "Fetching from db")
             repository.appDatabase.roomDao().getRooms().observeForever {
-                PLog.logThis(TAG, "getSavedRooms","Fetched from db: ${it.size}")
+                PLog.logThis(TAG, "getSavedRooms", "Fetched from db: ${it.size}")
                 repository.saveRooms(it)
                 listOfRooms.postValue(it)
             }

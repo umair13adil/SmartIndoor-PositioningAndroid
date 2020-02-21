@@ -15,7 +15,7 @@ import com.cubivue.inlogic.model.room.Room
         Room::class,
         AccessPoint::class
     ),
-    version = 3,
+    version = 4,
     exportSchema = false
 )
 abstract class AppDatabase : androidx.room.RoomDatabase() {
@@ -27,10 +27,11 @@ abstract class AppDatabase : androidx.room.RoomDatabase() {
         private const val databaseName = "inlogic-db"
 
         fun buildDatabase(context: Context): AppDatabase {
-            // Since Room is only used for FTS, destructive migration is enough because the tables
-            // are cleared every time the app launches.
-            // https://medium.com/androiddevelopers/understanding-migrations-with-room-f01e04b07929
-            return androidx.room.Room.databaseBuilder(context, AppDatabase::class.java, databaseName)
+            return androidx.room.Room.databaseBuilder(
+                context,
+                AppDatabase::class.java,
+                databaseName
+            )
                 .fallbackToDestructiveMigration()
                 .build()
         }

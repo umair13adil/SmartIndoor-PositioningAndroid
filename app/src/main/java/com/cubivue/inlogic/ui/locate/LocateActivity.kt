@@ -64,7 +64,8 @@ class LocateActivity : DaggerAppCompatActivity() {
                 it.roomId == result.first.roomId
             }.let {
                 it.map {
-                    it.inHere = result.second
+                    it.inHere = result.second.first
+                    it.assessment = result.second.second
                 }
             }
 
@@ -77,7 +78,7 @@ class LocateActivity : DaggerAppCompatActivity() {
     * Setup RecyclerView list adapter.
     */
     private fun setUpListAdapter() {
-        adapter = RoomsAdapter(::onDeleteSelection)
+        adapter = RoomsAdapter(::onDeleteSelection, isSimpleList = false)
 
         layoutManager = GridLayoutManager(this, 2)
 

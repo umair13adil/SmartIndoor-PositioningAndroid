@@ -14,5 +14,10 @@ data class Room(
     var accessPointTopRight: String = "",
     var accessPointBottomLeft: String = "",
     var accessPointBottomRight: String = "",
-    var inHere:Boolean = false
+    var inHere: Boolean = false,
+    var assessment: String = "",
+    var timeArrived: Long = 0L,
+    var timeLeft: Long = 0L,
+    var noOfArrivals: Int = 0,
+    var totalTimeStayed: Long = 0L
 )

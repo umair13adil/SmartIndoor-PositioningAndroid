@@ -16,8 +16,7 @@ open class InDoorLocationHelper @Inject constructor(val appDatabase: AppDatabase
 
     private val TAG = "InDoorLocationHelper"
 
-    fun isInTheRoom(room: Room): Observable<Boolean> {
-        PLog.logThis(TAG, "isInTheRoom","Checking if in room: ${room.roomName}")
+    fun isInTheRoom(room: Room): Observable<Pair<Boolean, String>> {
 
         return Observables.combineLatest(
             getSignalStrengthOfAccessPoint(room.accessPointTopLeft),
@@ -32,14 +31,13 @@ open class InDoorLocationHelper @Inject constructor(val appDatabase: AppDatabase
             locationsOfAccessPoints.add(ap4)
             locationsOfAccessPoints
         }.flatMap {
-            PLog.logThis(TAG, "isInTheRoom","Results: ${it.size}")
 
             val locations = it.map {
                 val location = SignalStrengths.getRouterLocations(it.strength)
                 location
             }
 
-            PLog.logThis(TAG, "isInTheRoom","Location: $locations")
+            //PLog.logThis(TAG, "isInTheRoom", "${room.roomName}: $locations")
             return@flatMap Observable.just(locations)
         }.flatMap {
             var count = 0
@@ -50,7 +48,7 @@ open class InDoorLocationHelper @Inject constructor(val appDatabase: AppDatabase
                 }
             }
 
-            return@flatMap Observable.just(count >= 3)
+            return@flatMap Observable.just(Pair(count >= 3, it.joinToString(",")))
         }
     }
 

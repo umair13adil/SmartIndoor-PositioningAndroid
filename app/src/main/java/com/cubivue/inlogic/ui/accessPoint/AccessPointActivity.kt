@@ -13,6 +13,7 @@ import android.os.Build
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import com.cubivue.inlogic.R
+import com.cubivue.inlogic.components.AlarmHelper
 import com.cubivue.inlogic.ui.locate.LocateActivity
 import com.cubivue.inlogic.ui.roomMapper.RoomMapperActivity
 import com.cubivue.inlogic.ui.rooms.RoomsActivity
@@ -164,7 +165,13 @@ open class AccessPointActivity() : DaggerAppCompatActivity() {
         }
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        AlarmHelper.stopSchedulerAlarm(this)
+    }
+
     private fun setUpWifiScanner(){
+        AlarmHelper.startSchedulerAlarm(this)
         wiFiScannerHelper = WiFiScannerHelper(::doOnResults)
         wiFiScannerHelper.setupWifiManager(applicationContext, this)
         wiFiScannerHelper.startScanner()

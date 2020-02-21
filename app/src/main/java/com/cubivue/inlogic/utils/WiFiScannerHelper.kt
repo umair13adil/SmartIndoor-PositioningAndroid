@@ -17,9 +17,6 @@ class WiFiScannerHelper(val doOnResults: (results: List<ScanResult>) -> Unit) {
 
     private lateinit var wifiManager: WifiManager
 
-    // Create the Handler object (on the main thread by default)
-    private val handler = Handler()
-
     private val wifiScanReceiver = object : BroadcastReceiver() {
 
         override fun onReceive(context: Context?, intent: Intent?) {
@@ -33,12 +30,17 @@ class WiFiScannerHelper(val doOnResults: (results: List<ScanResult>) -> Unit) {
         }
     }
 
-    fun setupWifiManager(applicationContext: Context, activity: Activity) {
-        wifiManager = applicationContext.getSystemService(Context.WIFI_SERVICE) as WifiManager
+    fun setupWifiManager(applicationContext: Context, context: Context) {
+        wifiManager =
+            applicationContext.applicationContext?.getSystemService(Context.WIFI_SERVICE) as WifiManager
 
         val intentFilter = IntentFilter()
         intentFilter.addAction(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION)
-        activity.registerReceiver(wifiScanReceiver, intentFilter)
+        context.registerReceiver(wifiScanReceiver, intentFilter)
+    }
+
+    fun unregisterReceiver(context: Context) {
+        context.unregisterReceiver(wifiScanReceiver)
     }
 
     private fun scanSuccess() {
@@ -54,13 +56,19 @@ class WiFiScannerHelper(val doOnResults: (results: List<ScanResult>) -> Unit) {
         doOnResults.invoke(results)
     }
 
-    fun startScanner() {
-        val runnableCode = object : Runnable {
-            override fun run() {
-                wifiManager.startScan()
-                handler.postDelayed(this, 5000)
+    fun startScanner(attachHandler: Boolean = true) {
+        if (attachHandler) {
+            // Create the Handler object (on the main thread by default)
+            val handler = Handler()
+            val runnableCode = object : Runnable {
+                override fun run() {
+                    wifiManager.startScan()
+                    handler.postDelayed(this, 5000)
+                }
             }
+            handler.post(runnableCode)
+        } else {
+            wifiManager.startScan()
         }
-        handler.post(runnableCode)
     }
 }
