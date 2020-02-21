@@ -65,7 +65,7 @@
             android:text="AP 3"
             android:textStyle="bold"
             android:gravity="end"
-            android:layout_marginBottom="@dimen/margin_45"/>
+            android:layout_marginBottom="@dimen/margin_55"/>
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/ap_4"

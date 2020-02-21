@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import com.cubivue.inlogic.R
 import com.cubivue.inlogic.model.room.Room
+import com.embrace.plog.pLogs.PLog
 import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_rooms.*
 import javax.inject.Inject
@@ -41,7 +42,7 @@ class RoomsActivity : DaggerAppCompatActivity() {
         setUpListAdapter()
 
         viewModel.getSavedRooms().observe(this, Observer {
-            Log.i(TAG, "Fetched: ${it.size}")
+            PLog.logThis(TAG, "getSavedRooms","Fetched: ${it.size}")
             listOfRooms.clear()
             listOfRooms.addAll(it)
 
@@ -63,7 +64,7 @@ class RoomsActivity : DaggerAppCompatActivity() {
     }
 
     private fun onConfirmDelete(roomId: String) {
-        Log.i(TAG, "onConfirmDelete: $roomId")
+        PLog.logThis(TAG, "onConfirmDelete","$roomId")
         viewModel.deleteRoom(roomId)
     }
 

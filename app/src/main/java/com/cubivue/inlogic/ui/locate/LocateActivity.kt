@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.cubivue.inlogic.R
 import com.cubivue.inlogic.model.room.Room
 import com.cubivue.inlogic.ui.rooms.RoomsAdapter
+import com.embrace.plog.pLogs.PLog
 import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_rooms.*
 import javax.inject.Inject
@@ -44,7 +45,7 @@ class LocateActivity : DaggerAppCompatActivity() {
         viewModel.getSavedRooms()
 
         viewModel.rooms.observe(this, Observer {
-            Log.i(TAG, "Fetched Rooms: ${it.size}")
+            PLog.logThis(TAG, "rooms","Fetched Rooms: ${it.size}")
             listOfRooms.clear()
             listOfRooms.addAll(it)
 
@@ -53,7 +54,7 @@ class LocateActivity : DaggerAppCompatActivity() {
         })
 
         viewModel.getAccessPoints().observeForever {
-            Log.i(TAG, "Fetched Access Points: ${it.size}")
+            PLog.logThis(TAG, "getAccessPoints","Fetched Access Points: ${it.size}")
             viewModel.locateMe()
         }
 

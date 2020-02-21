@@ -8,8 +8,13 @@ import android.content.IntentFilter
 import android.net.wifi.ScanResult
 import android.net.wifi.WifiManager
 import android.os.Handler
+import com.embrace.plog.pLogs.PLog
+import com.embrace.plog.pLogs.models.LogLevel
 
 class WiFiScannerHelper(val doOnResults: (results: List<ScanResult>) -> Unit) {
+
+    private val TAG = "WiFiScannerHelper"
+
     private lateinit var wifiManager: WifiManager
 
     // Create the Handler object (on the main thread by default)
@@ -17,17 +22,18 @@ class WiFiScannerHelper(val doOnResults: (results: List<ScanResult>) -> Unit) {
 
     private val wifiScanReceiver = object : BroadcastReceiver() {
 
-        override fun onReceive(context: Context, intent: Intent) {
-            val success = intent.getBooleanExtra(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION, false)
-            if (success) {
-                scanSuccess()
-            } else {
-                scanFailure()
+        override fun onReceive(context: Context?, intent: Intent?) {
+            intent?.getBooleanExtra(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION, false)?.let {
+                if (it) {
+                    scanSuccess()
+                } else {
+                    scanFailure()
+                }
             }
         }
     }
 
-    fun setupWifiManager(applicationContext: Context, activity:Activity) {
+    fun setupWifiManager(applicationContext: Context, activity: Activity) {
         wifiManager = applicationContext.getSystemService(Context.WIFI_SERVICE) as WifiManager
 
         val intentFilter = IntentFilter()
@@ -36,6 +42,7 @@ class WiFiScannerHelper(val doOnResults: (results: List<ScanResult>) -> Unit) {
     }
 
     private fun scanSuccess() {
+        PLog.logThis(TAG, "scanSuccess", "Success: SCAN_RESULTS_AVAILABLE_ACTION")
         val results = wifiManager.scanResults
         doOnResults.invoke(results)
     }

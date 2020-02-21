@@ -11,6 +11,7 @@ import com.cubivue.inlogic.model.enums.AccessPointLocation
 import com.cubivue.inlogic.model.enums.SignalStrengths
 import com.cubivue.inlogic.model.room.Room
 import com.cubivue.inlogic.utils.InDoorLocationHelper
+import com.embrace.plog.pLogs.PLog
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
@@ -37,9 +38,9 @@ class LocateViewModel @Inject constructor(
         val savedRooms = repository.getSavedRooms()
 
         if (savedRooms.isNullOrEmpty()) {
-            Log.i(TAG, "getSavedRooms: Fetching from db")
+            PLog.logThis(TAG, "getSavedRooms","Fetching from db")
             repository.appDatabase.roomDao().getRooms().observeForever {
-                Log.i(TAG, "getSavedRooms: Fetched from db: ${it.size}")
+                PLog.logThis(TAG, "getSavedRooms","Fetched from db: ${it.size}")
                 repository.saveRooms(it)
                 listOfRooms.postValue(it)
             }

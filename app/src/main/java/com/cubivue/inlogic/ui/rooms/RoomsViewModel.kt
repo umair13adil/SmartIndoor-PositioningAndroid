@@ -1,7 +1,6 @@
 package com.cubivue.inlogic.ui.rooms
 
 import android.content.Context
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel

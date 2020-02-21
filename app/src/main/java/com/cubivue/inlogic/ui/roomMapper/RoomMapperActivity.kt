@@ -12,6 +12,7 @@ import com.cubivue.inlogic.model.accessPoint.AccessPoint
 import com.cubivue.inlogic.model.enums.AccessPointPosition
 import com.cubivue.inlogic.model.room.Room
 import com.cubivue.inlogic.utils.showToast
+import com.embrace.plog.pLogs.PLog
 import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_room_mapper.*
 import java.util.*
@@ -47,7 +48,7 @@ class RoomMapperActivity : DaggerAppCompatActivity(),
         supportActionBar?.setDisplayShowHomeEnabled(true)
 
         viewModel.getAccessPoints().observeForever {
-            Log.i(TAG, "Fetched: ${it.size}")
+            PLog.logThis(TAG, "getAccessPoints","Fetched: ${it.size}")
             listOfAccessPoints.clear()
             listOfAccessPoints.addAll(it)
         }
@@ -94,7 +95,7 @@ class RoomMapperActivity : DaggerAppCompatActivity(),
     }
 
     override fun onSelected(position: AccessPointPosition, selectedName: String) {
-        Log.i(TAG, "onSelected: ${position}, Name: ${selectedName}")
+        PLog.logThis(TAG, "onSelected","${position}, Name: ${selectedName}")
 
         when (position) {
             AccessPointPosition.ACCESS_POINT_TOP_LEFT -> {

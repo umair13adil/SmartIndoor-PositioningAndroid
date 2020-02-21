@@ -5,6 +5,7 @@ import com.cubivue.inlogic.data.db.AppDatabase
 import com.cubivue.inlogic.data.db.AppExecutors
 import com.cubivue.inlogic.model.accessPoint.AccessPoint
 import com.cubivue.inlogic.model.room.Room
+import com.embrace.plog.pLogs.PLog
 import javax.inject.Inject
 import javax.inject.Named
 import javax.inject.Singleton
@@ -28,7 +29,6 @@ open class AccessPointRepository @Inject constructor(
 
     fun saveAccessPoints(accessPoints: List<AccessPoint>) {
         AppExecutors.instance?.diskIO()?.execute {
-            Log.i(TAG,"saveAccessPoints: Saving Access Points: ${accessPoints.size}")
 
             appDatabase.accessPointDao().insertAll(accessPoints)
 

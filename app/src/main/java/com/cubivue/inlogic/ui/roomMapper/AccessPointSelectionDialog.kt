@@ -11,6 +11,7 @@ import com.cubivue.inlogic.R
 import com.cubivue.inlogic.model.accessPoint.AccessPoint
 import com.cubivue.inlogic.model.enums.AccessPointPosition
 import com.cubivue.inlogic.utils.getAccessPointPosition
+import com.embrace.plog.pLogs.PLog
 import kotlinx.android.synthetic.main.dialog_access_point_selection.*
 
 class AccessPointSelectionDialog : DialogFragment() {
@@ -79,7 +80,7 @@ class AccessPointSelectionDialog : DialogFragment() {
 
     private fun onSelection(selected: String) {
         this.selected = selected
-        Log.i(TAG, "onSelection: $selected")
+        PLog.logThis(TAG, "onSelection","$selected")
         adapter.setSelection(selected)
         adapter.notifyDataSetChanged()
     }

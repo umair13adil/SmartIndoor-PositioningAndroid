@@ -39,7 +39,7 @@ class AccessPointViewModel @Inject constructor(
     fun addAccessPointsToList(results: List<ScanResult>): List<AccessPoint> {
 
         results.forEach { res ->
-            //Log.i(TAG, res.toString())
+            //PLog.logThis(TAG, res.toString())
             addAccessPointInfo(res)
         }
 

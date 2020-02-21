@@ -5,6 +5,7 @@ import com.cubivue.inlogic.data.db.AppDatabase
 import com.cubivue.inlogic.data.db.AppExecutors
 import com.cubivue.inlogic.model.accessPoint.AccessPoint
 import com.cubivue.inlogic.model.room.Room
+import com.embrace.plog.pLogs.PLog
 import javax.inject.Inject
 import javax.inject.Named
 import javax.inject.Singleton
@@ -23,7 +24,7 @@ open class RoomRepository @Inject constructor(
 
     fun saveRoom(room: Room) {
         AppExecutors.instance?.diskIO()?.execute {
-            Log.i(TAG, "saveRoom: Saving room.. ${room.toString()}")
+            PLog.logThis(TAG, "saveRoom","Saving room.. ${room.toString()}")
             appDatabase.roomDao().insert(room)
             dataSource.addRoom(room)
         }
@@ -34,7 +35,7 @@ open class RoomRepository @Inject constructor(
     }
 
     fun getAccessPointsList(): List<AccessPoint> {
-        Log.i(TAG, "getAccessPointsList: Fetching from cache")
+        PLog.logThis(TAG, "getAccessPointsList","Fetching from cache")
         return dataSource.getAccessPoints()
     }
 
@@ -46,7 +47,7 @@ open class RoomRepository @Inject constructor(
         dataSource.deleteRoom(roomId)
 
         AppExecutors.instance?.diskIO()?.execute {
-            Log.i(TAG, "deleteRoom: Deleting room.. $roomId")
+            PLog.logThis(TAG, "deleteRoom","Deleting room.. $roomId")
             appDatabase.roomDao().delete(roomId)
         }
     }

@@ -3,6 +3,8 @@ package com.cubivue.inlogic.utils;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.embrace.plog.pLogs.PLog;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -281,7 +283,7 @@ public class DateTimeUtils {
         DateFormat df = DateFormat.getTimeInstance();
         df.setTimeZone(TimeZone.getTimeZone("UTC"));
         long time_utc = new Date(timestamp).getTime();
-        Log.i(TAG, "Time: " + time_utc);
+        PLog.INSTANCE.logThis(TAG,"getUTCTimeStamp", "Time: " + time_utc);
         return time_utc / 1000L;
     }
 

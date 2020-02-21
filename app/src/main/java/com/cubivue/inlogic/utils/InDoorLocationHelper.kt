@@ -1,16 +1,13 @@
 package com.cubivue.inlogic.utils
 
-import android.util.Log
 import com.cubivue.inlogic.data.db.AppDatabase
 import com.cubivue.inlogic.model.accessPoint.AccessPoint
 import com.cubivue.inlogic.model.enums.AccessPointLocation
 import com.cubivue.inlogic.model.enums.SignalStrengths
 import com.cubivue.inlogic.model.room.Room
+import com.embrace.plog.pLogs.PLog
 import io.reactivex.Observable
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.Observables
-import io.reactivex.rxkotlin.subscribeBy
-import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -20,7 +17,7 @@ open class InDoorLocationHelper @Inject constructor(val appDatabase: AppDatabase
     private val TAG = "InDoorLocationHelper"
 
     fun isInTheRoom(room: Room): Observable<Boolean> {
-        Log.i(TAG, "Checking if in room: ${room.roomName}")
+        PLog.logThis(TAG, "isInTheRoom","Checking if in room: ${room.roomName}")
 
         return Observables.combineLatest(
             getSignalStrengthOfAccessPoint(room.accessPointTopLeft),
@@ -35,14 +32,14 @@ open class InDoorLocationHelper @Inject constructor(val appDatabase: AppDatabase
             locationsOfAccessPoints.add(ap4)
             locationsOfAccessPoints
         }.flatMap {
-            Log.i(TAG, "Results: ${it.size}")
+            PLog.logThis(TAG, "isInTheRoom","Results: ${it.size}")
 
             val locations = it.map {
                 val location = SignalStrengths.getRouterLocations(it.strength)
                 location
             }
 
-            Log.i(TAG, "Location: $locations")
+            PLog.logThis(TAG, "isInTheRoom","Location: $locations")
             return@flatMap Observable.just(locations)
         }.flatMap {
             var count = 0
