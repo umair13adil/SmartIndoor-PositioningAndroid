@@ -27,7 +27,7 @@ class MainActivity : DaggerAppCompatActivity() {
     private val MY_PERMISSIONS_REQUEST = 1
     private val STORAGE_PERMISSIONS_REQUEST = 10
 
-    private lateinit var wiFiScannerHelper: WiFiScannerHelper
+    private var wiFiScannerHelper: WiFiScannerHelper? = null
 
     @Inject
     lateinit var textToSpeech: TTSHelper
@@ -120,15 +120,15 @@ class MainActivity : DaggerAppCompatActivity() {
     }
 
     override fun onPause() {
-        wiFiScannerHelper.unregisterReceiver(this)
+        wiFiScannerHelper?.unregisterReceiver(this)
         super.onPause()
     }
 
     private fun setUpWifiScanner() {
         AlarmHelper.startSchedulerAlarm(this)
         wiFiScannerHelper = WiFiScannerHelper(::doOnResults, lifecycle)
-        wiFiScannerHelper.setupWifiManager(applicationContext!!, this)
-        wiFiScannerHelper.startScanner()
+        wiFiScannerHelper?.setupWifiManager(applicationContext!!, this)
+        wiFiScannerHelper?.startScanner()
     }
 
     private fun doOnResults(results: List<ScanResult>) {

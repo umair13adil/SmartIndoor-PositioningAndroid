@@ -8,6 +8,7 @@ import androidx.appcompat.widget.AppCompatButton
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.findNavController
 import com.cubivue.inlogic.R
 import com.cubivue.inlogic.model.accessPoint.AccessPoint
 import com.cubivue.inlogic.model.enums.AccessPointPosition
@@ -33,11 +34,6 @@ class RoomMapperFragment : BaseFragment(),
     private var listOfAccessPoints = arrayListOf<AccessPoint>()
     private val room = Room(roomId = UUID.randomUUID().toString())
 
-    override fun onAttachFragment(fragment: Fragment) {
-        if (fragment is AccessPointSelectionDialog) {
-            fragment.setOnAccessPointSelectionListener(this)
-        }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -56,7 +52,7 @@ class RoomMapperFragment : BaseFragment(),
             ViewModelProviders.of(this, viewModelFactory).get(RoomMapperViewModel::class.java)
 
         viewModel.getAccessPoints().observeForever {
-            PLog.logThis(TAG, "getAccessPoints","Fetched: ${it.size}")
+            PLog.logThis(TAG, "getAccessPoints", "Fetched: ${it.size}")
             listOfAccessPoints.clear()
             listOfAccessPoints.addAll(it)
         }
@@ -83,17 +79,21 @@ class RoomMapperFragment : BaseFragment(),
             } else {
                 room.roomName = edit_room_name.text.toString()
                 viewModel.saveRoomInfo(room)
+                view.findNavController().popBackStack()
             }
         }
     }
 
     private fun showAccessPointSelectionDialog(position: AccessPointPosition) {
         try {
-            fragmentManager?.beginTransaction().let {
+            childFragmentManager.beginTransaction().let {
                 val dialog =
                     AccessPointSelectionDialog.newInstance(position.value, listOfAccessPoints)
+                dialog.also {
+                    it.setOnAccessPointSelectionListener(this)
+                }
                 dialog.isCancelable = true
-                dialog.show(it!!, "selection-dialog")
+                dialog.show(it, "selection-dialog")
             }
         } catch (e: Exception) {
             e.printStackTrace()
@@ -102,7 +102,7 @@ class RoomMapperFragment : BaseFragment(),
     }
 
     override fun onSelected(position: AccessPointPosition, selectedName: String) {
-        PLog.logThis(TAG, "onSelected","${position}, Name: ${selectedName}")
+        PLog.logThis(TAG, "onSelected", "${position}, Name: ${selectedName}")
 
         when (position) {
             AccessPointPosition.ACCESS_POINT_TOP_LEFT -> {

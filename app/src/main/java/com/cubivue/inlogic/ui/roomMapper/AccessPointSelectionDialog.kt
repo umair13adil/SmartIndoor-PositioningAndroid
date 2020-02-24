@@ -24,7 +24,7 @@ class AccessPointSelectionDialog : DialogFragment() {
     private var selected = ""
     private var position = -1
 
-    private lateinit var callback: AccessPointSelectionListener
+    private var callback: AccessPointSelectionListener? = null
 
     fun setOnAccessPointSelectionListener(callback: AccessPointSelectionListener) {
         this.callback = callback
@@ -59,7 +59,7 @@ class AccessPointSelectionDialog : DialogFragment() {
 
         btn_select.setOnClickListener {
             if (selected.isNotEmpty()) {
-                callback.onSelected(getAccessPointPosition(position), selected)
+                callback?.onSelected(getAccessPointPosition(position), selected)
                 dismissAllowingStateLoss()
             }
         }
@@ -80,7 +80,7 @@ class AccessPointSelectionDialog : DialogFragment() {
 
     private fun onSelection(selected: String) {
         this.selected = selected
-        PLog.logThis(TAG, "onSelection","$selected")
+        PLog.logThis(TAG, "onSelection", "$selected")
         adapter.setSelection(selected)
         adapter.notifyDataSetChanged()
     }
