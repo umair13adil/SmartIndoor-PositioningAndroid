@@ -5,18 +5,20 @@ import android.content.pm.PackageManager
 import android.net.wifi.ScanResult
 import android.os.Build
 import android.os.Bundle
+import android.speech.tts.TextToSpeech
 import android.view.MenuItem
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.navigation.Navigation
-import androidx.navigation.findNavController
 import com.cubivue.inlogic.R
 import com.cubivue.inlogic.components.AlarmHelper
 import com.cubivue.inlogic.ui.accessPoint.AccessPointFragment
+import com.cubivue.inlogic.utils.TTSHelper
 import com.cubivue.inlogic.utils.WiFiScannerHelper
 import com.cubivue.inlogic.utils.logs.LogsHelper
-import com.embrace.plog.pLogs.PLog
 import dagger.android.support.DaggerAppCompatActivity
+import javax.inject.Inject
+
 
 class MainActivity : DaggerAppCompatActivity() {
 
@@ -26,14 +28,16 @@ class MainActivity : DaggerAppCompatActivity() {
     private val STORAGE_PERMISSIONS_REQUEST = 10
 
     private lateinit var wiFiScannerHelper: WiFiScannerHelper
-    private var accessPointFragment: AccessPointFragment? = null
+
+    @Inject
+    lateinit var textToSpeech: TTSHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        accessPointFragment =
-            supportFragmentManager.findFragmentById(R.id.accessPointFragment) as AccessPointFragment?
+        //Setup Text-to-Speech
+        textToSpeech.setUpTextToSpeech()
     }
 
     private fun getStoragePermissions() {
@@ -128,7 +132,12 @@ class MainActivity : DaggerAppCompatActivity() {
     }
 
     private fun doOnResults(results: List<ScanResult>) {
-        accessPointFragment?.doOnResults(results)
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment)
+        navHostFragment?.childFragmentManager?.fragments?.first()?.let {
+            if (it is AccessPointFragment) {
+                it.doOnResults(results)
+            }
+        }
     }
 
     override fun onResume() {
@@ -138,6 +147,7 @@ class MainActivity : DaggerAppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
+        textToSpeech.disposeTextToSpeech()
         AlarmHelper.stopSchedulerAlarm(this)
     }
 

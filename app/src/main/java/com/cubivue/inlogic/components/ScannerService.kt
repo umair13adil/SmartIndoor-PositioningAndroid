@@ -137,6 +137,8 @@ class ScannerService : Service() , LifecycleOwner {
         }
     }
 
+
+
     private fun startRunningInForeground() {
 
         //if more than or equal to 26

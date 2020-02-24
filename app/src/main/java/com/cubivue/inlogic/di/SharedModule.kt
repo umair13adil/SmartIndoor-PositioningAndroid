@@ -1,11 +1,13 @@
 package com.cubivue.inlogic.di
 
+import android.content.Context
 import com.cubivue.inlogic.data.db.AppDatabase
 import com.cubivue.inlogic.data.repositories.accessPoint.AccessPointActivityDataSource
 import com.cubivue.inlogic.data.repositories.accessPoint.AccessPointRepository
 import com.cubivue.inlogic.data.repositories.room.RoomMapperActivityDataSource
 import com.cubivue.inlogic.data.repositories.room.RoomRepository
 import com.cubivue.inlogic.utils.InDoorLocationHelper
+import com.cubivue.inlogic.utils.TTSHelper
 import dagger.Module
 import dagger.Provides
 import javax.inject.Named
@@ -54,7 +56,13 @@ class SharedModule {
 
     @Singleton
     @Provides
-    fun provideInDoorLocationHelper(appDatabase: AppDatabase): InDoorLocationHelper {
-        return InDoorLocationHelper(appDatabase)
+    fun provideTTSHelper(context: Context): TTSHelper {
+        return TTSHelper(context)
+    }
+
+    @Singleton
+    @Provides
+    fun provideInDoorLocationHelper(appDatabase: AppDatabase, textToSpeech: TTSHelper): InDoorLocationHelper {
+        return InDoorLocationHelper(appDatabase, textToSpeech)
     }
 }

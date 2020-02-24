@@ -31,6 +31,15 @@
         android:text="Locate Me"
         android:layout_margin="@dimen/margin_10"/>
 
+    <androidx.core.widget.ContentLoadingProgressBar
+        android:id="@+id/progress_circular"
+        style="@style/Widget.AppCompat.ProgressBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        android:visibility="visible"
+        android:layout_marginTop="@dimen/margin_55"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/list_access_points"
         style="@style/scrollbarStyleVertical"

@@ -73,6 +73,7 @@ open class AccessPointFragment() : BaseFragment() {
     }
 
     fun doOnResults(results: List<ScanResult>) {
+        progress_circular?.visibility = View.GONE
 
         viewModel.accessPoints.clear()
         adapter.submitList(viewModel.accessPoints)

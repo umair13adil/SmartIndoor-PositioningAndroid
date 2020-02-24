@@ -12,7 +12,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-open class InDoorLocationHelper @Inject constructor(val appDatabase: AppDatabase) {
+open class InDoorLocationHelper @Inject constructor(val appDatabase: AppDatabase, val textToSpeech: TTSHelper) {
 
     private val TAG = "InDoorLocationHelper"
 
@@ -58,6 +58,8 @@ open class InDoorLocationHelper @Inject constructor(val appDatabase: AppDatabase
                 }
 
                 lastResult = "${room.roomName}: ${result.first}"
+
+                textToSpeech.speak(room.roomName)
             }
 
             return@flatMap Observable.just(result)
