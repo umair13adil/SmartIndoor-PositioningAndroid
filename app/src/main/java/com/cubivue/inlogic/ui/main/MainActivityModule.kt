@@ -1,4 +1,4 @@
-package com.cubivue.inlogic.ui.rooms
+package com.cubivue.inlogic.ui.main
 
 import androidx.lifecycle.ViewModel
 import com.cubivue.inlogic.di.ViewModelKey
@@ -8,10 +8,10 @@ import dagger.multibindings.IntoMap
 
 @Module
 @Suppress("UNUSED")
-abstract class RoomsActivityModule {
+abstract class MainActivityModule {
 
     @Binds
     @IntoMap
-    @ViewModelKey(RoomsViewModel::class)
-    internal abstract fun bindViewModel(viewModel: RoomsViewModel): ViewModel
+    @ViewModelKey(MainViewModel::class)
+    internal abstract fun bindViewModel(viewModel: MainViewModel): ViewModel
 }

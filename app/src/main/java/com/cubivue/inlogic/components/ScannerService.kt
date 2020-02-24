@@ -9,11 +9,14 @@ import android.net.wifi.ScanResult
 import android.os.Build
 import android.os.IBinder
 import androidx.core.app.NotificationCompat
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.LifecycleRegistry
 import com.cubivue.inlogic.R
 import com.cubivue.inlogic.data.db.AppDatabase
 import com.cubivue.inlogic.data.db.AppExecutors
 import com.cubivue.inlogic.model.accessPoint.AccessPoint
-import com.cubivue.inlogic.ui.accessPoint.AccessPointActivity
+import com.cubivue.inlogic.ui.accessPoint.AccessPointFragment
 import com.cubivue.inlogic.utils.InDoorLocationHelper
 import com.cubivue.inlogic.utils.WiFiScannerHelper
 import com.embrace.plog.pLogs.PLog
@@ -24,7 +27,7 @@ import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 
-class ScannerService : Service() {
+class ScannerService : Service() , LifecycleOwner {
 
     private val TAG = "ScannerService"
     private lateinit var wiFiScannerHelper: WiFiScannerHelper
@@ -35,14 +38,24 @@ class ScannerService : Service() {
     @Inject
     lateinit var locationHelper: InDoorLocationHelper
 
+    private lateinit var lifecycleRegistry: LifecycleRegistry
+
+    override fun getLifecycle(): Lifecycle {
+        return lifecycleRegistry
+    }
+
     override fun onCreate() {
         AndroidInjection.inject(this)
         super.onCreate()
+
+        lifecycleRegistry = LifecycleRegistry(this)
+        lifecycleRegistry.currentState = Lifecycle.State.CREATED
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         startRunningInForeground()
         PLog.logThis(TAG, "onStartCommand", "Scanner Service Started.")
+        lifecycleRegistry.currentState = Lifecycle.State.STARTED
         setUpWifiScanner()
         return Service.START_NOT_STICKY
     }
@@ -53,11 +66,12 @@ class ScannerService : Service() {
 
     override fun onDestroy() {
         super.onDestroy()
+        lifecycleRegistry.currentState = Lifecycle.State.DESTROYED
         PLog.logThis(TAG, "onDestroy", "Scanner Service Stopped.")
     }
 
     private fun setUpWifiScanner() {
-        wiFiScannerHelper = WiFiScannerHelper(::doOnResults)
+        wiFiScannerHelper = WiFiScannerHelper(::doOnResults, lifecycle)
         wiFiScannerHelper.setupWifiManager(applicationContext, this)
         wiFiScannerHelper.startScanner(attachHandler = false)
     }
@@ -153,7 +167,7 @@ class ScannerService : Service() {
                     .setLargeIcon(icon)
                     .build()
 
-                val notificationIntent = Intent(applicationContext, AccessPointActivity::class.java)
+                val notificationIntent = Intent(applicationContext, AccessPointFragment::class.java)
                 notificationIntent.flags =
                     Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
                 notification.contentIntent =
@@ -178,7 +192,7 @@ class ScannerService : Service() {
 
         val pendingIntent = PendingIntent.getActivity(
             this, 0,
-            Intent(this, AccessPointActivity::class.java), 0
+            Intent(this, AccessPointFragment::class.java), 0
         )
 
         return NotificationCompat.Builder(this,"2")

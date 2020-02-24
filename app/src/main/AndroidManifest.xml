@@ -12,7 +12,7 @@
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
     <application
-        android:name="com.cubivue.inlogic.MainApplication"
+        android:name=".MainApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -21,22 +21,7 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name="com.cubivue.inlogic.ui.roomMapper.RoomMapperActivity"
-            android:screenOrientation="portrait"
-            android:label="Room Mapper"></activity>
-
-        <activity
-            android:name=".ui.rooms.RoomsActivity"
-            android:screenOrientation="portrait"
-            android:label="My Rooms"></activity>
-
-        <activity
-            android:name=".ui.locate.LocateActivity"
-            android:screenOrientation="portrait"
-            android:label="My Location"></activity>
-
-        <activity
-            android:name="com.cubivue.inlogic.ui.accessPoint.AccessPointActivity"
+            android:name=".ui.main.MainActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -53,9 +38,7 @@
             </intent-filter>
         </receiver>
 
-        <service
-            android:name=".components.ScannerService" />
-
+        <service android:name=".components.ScannerService" />
     </application>
 
 </manifest>

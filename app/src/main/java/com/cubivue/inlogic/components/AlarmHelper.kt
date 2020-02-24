@@ -11,8 +11,8 @@ object AlarmHelper {
 
     private val TAG = "AlarmHelper"
 
-    fun startSchedulerAlarm(context: Context) {
-        val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager?
+    fun startSchedulerAlarm(context: Context?) {
+        val alarmManager = context?.getSystemService(Context.ALARM_SERVICE) as AlarmManager?
         val intent = Intent(context, AlarmReceiver::class.java)
         intent.action = AlarmReceiver.alarmIntent
         val alarmIntent = PendingIntent.getBroadcast(context, AlarmReceiver.alarmIntentCode, intent, PendingIntent.FLAG_UPDATE_CURRENT)
@@ -20,8 +20,8 @@ object AlarmHelper {
         PLog.logThis(TAG, "startSchedulerAlarm", "Scheduler alarm started!", LogLevel.INFO)
     }
 
-    fun stopSchedulerAlarm(context: Context) {
-        val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager?
+    fun stopSchedulerAlarm(context: Context?) {
+        val alarmManager = context?.getSystemService(Context.ALARM_SERVICE) as AlarmManager?
         val intent = Intent(context, AlarmReceiver::class.java)
         intent.action = AlarmReceiver.alarmIntent
         val alarmIntent = PendingIntent.getBroadcast(context, AlarmReceiver.alarmIntentCode, intent, PendingIntent.FLAG_UPDATE_CURRENT)

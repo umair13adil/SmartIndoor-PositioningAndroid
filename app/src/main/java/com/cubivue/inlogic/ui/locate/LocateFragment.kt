@@ -1,7 +1,9 @@
 package com.cubivue.inlogic.ui.locate
 
 import android.os.Bundle
-import android.util.Log
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
@@ -11,12 +13,13 @@ import com.cubivue.inlogic.model.room.Room
 import com.cubivue.inlogic.ui.rooms.RoomsAdapter
 import com.embrace.plog.pLogs.PLog
 import dagger.android.support.DaggerAppCompatActivity
-import kotlinx.android.synthetic.main.activity_rooms.*
+import dagger.android.support.DaggerFragment
+import kotlinx.android.synthetic.main.fragment_rooms.*
 import javax.inject.Inject
 
-class LocateActivity : DaggerAppCompatActivity() {
+class LocateFragment : DaggerFragment() {
 
-    private val TAG = "LocateActivity"
+    private val TAG = "LocateFragment"
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -28,23 +31,26 @@ class LocateActivity : DaggerAppCompatActivity() {
     private lateinit var adapter: RoomsAdapter
     private lateinit var layoutManager: GridLayoutManager
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        return inflater.inflate(R.layout.fragment_rooms, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         viewModel =
             ViewModelProviders.of(this, viewModelFactory).get(LocateViewModel::class.java)
-
-        setContentView(R.layout.activity_rooms)
-
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.setDisplayShowHomeEnabled(true)
 
         setUpListAdapter()
 
         //viewModel.getAccessPoints()
         viewModel.getSavedRooms()
 
-        viewModel.rooms.observe(this, Observer {
+        viewModel.rooms.observe(viewLifecycleOwner, Observer {
             PLog.logThis(TAG, "rooms","Fetched Rooms: ${it.size}")
             listOfRooms.clear()
             listOfRooms.addAll(it)
@@ -80,7 +86,7 @@ class LocateActivity : DaggerAppCompatActivity() {
     private fun setUpListAdapter() {
         adapter = RoomsAdapter(::onDeleteSelection, isSimpleList = false)
 
-        layoutManager = GridLayoutManager(this, 2)
+        layoutManager = GridLayoutManager(context, 2)
 
         list_rooms.layoutManager = layoutManager
         list_rooms.adapter = adapter
@@ -88,10 +94,5 @@ class LocateActivity : DaggerAppCompatActivity() {
 
     private fun onDeleteSelection(id: String) {
 
-    }
-
-    override fun onSupportNavigateUp(): Boolean {
-        onBackPressed()
-        return true
     }
 }

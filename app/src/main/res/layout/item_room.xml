@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="@dimen/margin_300"
     android:orientation="vertical"
-    tools:context=".ui.roomMapper.RoomMapperActivity">
+    tools:context=".ui.roomMapper.RoomMapperFragment">
 
     <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/btn_delete"

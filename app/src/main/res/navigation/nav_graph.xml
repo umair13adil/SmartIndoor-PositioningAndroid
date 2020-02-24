@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/accessPointFragment">
+
+    <fragment
+        android:id="@+id/accessPointFragment"
+        android:name="com.cubivue.inlogic.ui.accessPoint.AccessPointFragment"
+        android:label="Access Points"
+        tools:layout="@layout/fragment_access_points" >
+        <action
+            android:id="@+id/action_accessPointFragment_to_roomMapperFragment"
+            app:destination="@+id/roomMapperFragment"
+            app:enterAnim="@anim/fragment_fade_enter"
+            app:exitAnim="@anim/fragment_fade_exit"
+            app:launchSingleTop="true"
+            app:popUpTo="@+id/accessPointFragment" />
+        <action
+            android:id="@+id/action_accessPointFragment_to_roomsFragment"
+            app:destination="@id/roomsFragment"
+            app:enterAnim="@anim/fragment_fade_enter"
+            app:exitAnim="@anim/fragment_fade_exit"
+            app:launchSingleTop="true"
+            app:popUpTo="@+id/accessPointFragment" />
+        <action
+            android:id="@+id/action_accessPointFragment_to_locateFragment"
+            app:destination="@id/locateFragment"
+            app:enterAnim="@anim/fragment_fade_enter"
+            app:exitAnim="@anim/fragment_fade_exit"
+            app:launchSingleTop="true"
+            app:popUpTo="@+id/accessPointFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/roomMapperFragment"
+        android:name="com.cubivue.inlogic.ui.roomMapper.RoomMapperFragment"
+        android:label="Room Mapper"
+        tools:layout="@layout/fragment_room_mapper" />
+
+    <fragment
+        android:id="@+id/roomsFragment"
+        android:name="com.cubivue.inlogic.ui.rooms.RoomsFragment"
+        android:label="Rooms"
+        tools:layout="@layout/fragment_rooms" />
+
+    <fragment
+        android:id="@+id/locateFragment"
+        android:name="com.cubivue.inlogic.ui.locate.LocateFragment"
+        android:label="Locate Me"
+        tools:layout="@layout/fragment_rooms" />
+
+</navigation>

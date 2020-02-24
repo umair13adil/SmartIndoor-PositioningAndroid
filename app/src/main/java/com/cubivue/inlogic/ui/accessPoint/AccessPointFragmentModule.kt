@@ -8,7 +8,7 @@ import dagger.multibindings.IntoMap
 
 @Module
 @Suppress("UNUSED")
-abstract class AccessPointActivityModule {
+abstract class AccessPointFragmentModule {
 
     @Binds
     @IntoMap

@@ -1,10 +1,11 @@
 package com.cubivue.inlogic.ui.roomMapper
 
 import android.os.Bundle
-import android.util.Log
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.appcompat.widget.AppCompatButton
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import com.cubivue.inlogic.R
@@ -14,14 +15,15 @@ import com.cubivue.inlogic.model.room.Room
 import com.cubivue.inlogic.utils.showToast
 import com.embrace.plog.pLogs.PLog
 import dagger.android.support.DaggerAppCompatActivity
-import kotlinx.android.synthetic.main.activity_room_mapper.*
+import dagger.android.support.DaggerFragment
+import kotlinx.android.synthetic.main.fragment_room_mapper.*
 import java.util.*
 import javax.inject.Inject
 
-class RoomMapperActivity : DaggerAppCompatActivity(),
+class RoomMapperFragment : DaggerFragment(),
     AccessPointSelectionDialog.AccessPointSelectionListener {
 
-    private val TAG = "RoomMapperActivity"
+    private val TAG = "RoomMapperFragment"
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -36,16 +38,20 @@ class RoomMapperActivity : DaggerAppCompatActivity(),
         }
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        return inflater.inflate(R.layout.fragment_room_mapper, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
 
         viewModel =
             ViewModelProviders.of(this, viewModelFactory).get(RoomMapperViewModel::class.java)
-
-        setContentView(R.layout.activity_room_mapper)
-
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.setDisplayShowHomeEnabled(true)
 
         viewModel.getAccessPoints().observeForever {
             PLog.logThis(TAG, "getAccessPoints","Fetched: ${it.size}")
@@ -75,18 +81,17 @@ class RoomMapperActivity : DaggerAppCompatActivity(),
             } else {
                 room.roomName = edit_room_name.text.toString()
                 viewModel.saveRoomInfo(room)
-                finish()
             }
         }
     }
 
     private fun showAccessPointSelectionDialog(position: AccessPointPosition) {
         try {
-            supportFragmentManager.beginTransaction().let {
+            fragmentManager?.beginTransaction().let {
                 val dialog =
                     AccessPointSelectionDialog.newInstance(position.value, listOfAccessPoints)
                 dialog.isCancelable = true
-                dialog.show(it, "selection-dialog")
+                dialog.show(it!!, "selection-dialog")
             }
         } catch (e: Exception) {
             e.printStackTrace()
@@ -131,10 +136,5 @@ class RoomMapperActivity : DaggerAppCompatActivity(),
 
     private fun saveAccessPointInfo(textView: AppCompatButton, name: String) {
         textView.text = name
-    }
-
-    override fun onSupportNavigateUp(): Boolean {
-        onBackPressed()
-        return true
     }
 }

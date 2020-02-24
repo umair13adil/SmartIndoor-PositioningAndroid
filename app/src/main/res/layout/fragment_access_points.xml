@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.accessPoint.AccessPointActivity">
+    tools:context=".ui.accessPoint.AccessPointFragment">
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_room_mapper"

@@ -68,48 +68,50 @@ object LogsHelper {
         )
     }
 
-    fun setUpPLogger(context: Context) {
+    fun setUpPLogger(context: Context?) {
 
-        val config = getLogsConfiguration(context)
+        context?.let {
+            val config = getLogsConfiguration(context)
 
-        config.also { it ->
-            it.getLogEventsListener()
-                .doOnNext {
-                    when (it.event) {
-                        EventTypes.NEW_ERROR_REPORTED -> {
+            config.also { it ->
+                it.getLogEventsListener()
+                    .doOnNext {
+                        when (it.event) {
+                            EventTypes.NEW_ERROR_REPORTED -> {
 
-                        }
-                        EventTypes.LOG_TYPE_EXPORTED -> {
-                            PLog.logThis("PLogger", "log exported", it.data, LogLevel.INFO)
-                        }
-                        EventTypes.NEW_EVENT_DIRECTORY_CREATED -> {
-                            PLog.logThis(
-                                "PLogger",
-                                "event",
-                                "New directory created: " + it.data,
-                                LogLevel.INFO
-                            )
-                        }
-                        EventTypes.DELETE_EXPORTED_FILES -> {
-                            PLog.logThis(
-                                "PLogger",
-                                "event",
-                                "Exported files will be deleted: " + it.data,
-                                LogLevel.INFO
-                            )
-                        }
-                        else -> {
-                            //PLog.logThis("PLogger", "event", "Logger Event: ${it.event}" + it.data, LogLevel.INFO)
+                            }
+                            EventTypes.LOG_TYPE_EXPORTED -> {
+                                PLog.logThis("PLogger", "log exported", it.data, LogLevel.INFO)
+                            }
+                            EventTypes.NEW_EVENT_DIRECTORY_CREATED -> {
+                                PLog.logThis(
+                                    "PLogger",
+                                    "event",
+                                    "New directory created: " + it.data,
+                                    LogLevel.INFO
+                                )
+                            }
+                            EventTypes.DELETE_EXPORTED_FILES -> {
+                                PLog.logThis(
+                                    "PLogger",
+                                    "event",
+                                    "Exported files will be deleted: " + it.data,
+                                    LogLevel.INFO
+                                )
+                            }
+                            else -> {
+                                //PLog.logThis("PLogger", "event", "Logger Event: ${it.event}" + it.data, LogLevel.INFO)
+                            }
                         }
                     }
-                }
-                .subscribe()
-        }
+                    .subscribe()
+            }
 
-        if (areStoragePermissionsGranted(context)) {
+            if (areStoragePermissionsGranted(context)) {
 
-            //Apply Configurations
-            PLog.applyConfigurations(config, saveToFile = true)
+                //Apply Configurations
+                PLog.applyConfigurations(config, saveToFile = true)
+            }
         }
     }
 

@@ -17,20 +17,22 @@
 package com.cubivue.inlogic.di
 
 import com.cubivue.inlogic.components.ScannerService
-import com.cubivue.inlogic.ui.accessPoint.AccessPointActivity
-import com.cubivue.inlogic.ui.accessPoint.AccessPointActivityModule
-import com.cubivue.inlogic.ui.locate.LocateActivity
-import com.cubivue.inlogic.ui.locate.LocateActivityModule
-import com.cubivue.inlogic.ui.roomMapper.RoomMapperActivity
-import com.cubivue.inlogic.ui.roomMapper.RoomMapperActivityModule
-import com.cubivue.inlogic.ui.rooms.RoomsActivity
-import com.cubivue.inlogic.ui.rooms.RoomsActivityModule
+import com.cubivue.inlogic.ui.accessPoint.AccessPointFragment
+import com.cubivue.inlogic.ui.accessPoint.AccessPointFragmentModule
+import com.cubivue.inlogic.ui.locate.LocateFragment
+import com.cubivue.inlogic.ui.locate.LocateModule
+import com.cubivue.inlogic.ui.main.MainActivity
+import com.cubivue.inlogic.ui.main.MainActivityModule
+import com.cubivue.inlogic.ui.roomMapper.RoomMapperFragment
+import com.cubivue.inlogic.ui.roomMapper.RoomMapperModule
+import com.cubivue.inlogic.ui.rooms.RoomsFragment
+import com.cubivue.inlogic.ui.rooms.RoomsModule
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
 /**
  * We want Dagger.Android to create a Subcomponent which has a parent Component of whichever module
- * ActivityBindingModule is on, in our case that will be [AppComponent]. You never
+ * BindingModule is on, in our case that will be [AppComponent]. You never
  * need to tell [AppComponent] that it is going to have all these subcomponents
  * nor do you need to tell these subcomponents that [AppComponent] exists.
  * We are also telling Dagger.Android that this generated SubComponent needs to include the
@@ -39,43 +41,47 @@ import dagger.android.ContributesAndroidInjector
  */
 @Module
 @Suppress("UNUSED")
-abstract class ActivityBindingModule {
+abstract class BindingModule {
 
     @ActivityScoped
     @ContributesAndroidInjector(
         modules = [
-            // activity
-            AccessPointActivityModule::class
+            MainActivityModule::class
         ]
     )
-    internal abstract fun mainActivity(): AccessPointActivity
+    internal abstract fun mainActivity(): MainActivity
 
-    @ActivityScoped
+    @FragmentScoped
     @ContributesAndroidInjector(
         modules = [
-            // activity
-            RoomMapperActivityModule::class
+            AccessPointFragmentModule::class
         ]
     )
-    internal abstract fun roomMapperActivity(): RoomMapperActivity
+    internal abstract fun contributeAccessPointFragment(): AccessPointFragment
 
-    @ActivityScoped
+    @FragmentScoped
     @ContributesAndroidInjector(
         modules = [
-            // activity
-            RoomsActivityModule::class
+            RoomMapperModule::class
         ]
     )
-    internal abstract fun roomsActivity(): RoomsActivity
+    internal abstract fun roomMapperActivity(): RoomMapperFragment
 
-    @ActivityScoped
+    @FragmentScoped
     @ContributesAndroidInjector(
         modules = [
-            // activity
-            LocateActivityModule::class
+            RoomsModule::class
         ]
     )
-    internal abstract fun locateActivity(): LocateActivity
+    internal abstract fun roomsActivity(): RoomsFragment
+
+    @FragmentScoped
+    @ContributesAndroidInjector(
+        modules = [
+            LocateModule::class
+        ]
+    )
+    internal abstract fun locateActivity(): LocateFragment
 
 
     @ContributesAndroidInjector

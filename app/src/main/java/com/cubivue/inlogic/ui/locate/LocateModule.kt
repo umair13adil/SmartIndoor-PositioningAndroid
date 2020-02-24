@@ -1,4 +1,4 @@
-package com.cubivue.inlogic.ui.roomMapper
+package com.cubivue.inlogic.ui.locate
 
 import androidx.lifecycle.ViewModel
 import com.cubivue.inlogic.di.ViewModelKey
@@ -8,10 +8,10 @@ import dagger.multibindings.IntoMap
 
 @Module
 @Suppress("UNUSED")
-abstract class RoomMapperActivityModule {
+abstract class LocateModule {
 
     @Binds
     @IntoMap
-    @ViewModelKey(RoomMapperViewModel::class)
-    internal abstract fun bindViewModel(viewModel: RoomMapperViewModel): ViewModel
+    @ViewModelKey(LocateViewModel::class)
+    internal abstract fun bindViewModel(viewModel: LocateViewModel): ViewModel
 }
