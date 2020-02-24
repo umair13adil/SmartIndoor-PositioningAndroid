@@ -1,6 +1,5 @@
 package com.cubivue.inlogic.ui.accessPoint
 
-import android.content.Intent
 import android.net.wifi.ScanResult
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,14 +10,11 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.cubivue.inlogic.R
-import com.cubivue.inlogic.ui.locate.LocateFragment
-import com.cubivue.inlogic.ui.roomMapper.RoomMapperFragment
-import com.cubivue.inlogic.ui.rooms.RoomsFragment
-import dagger.android.support.DaggerFragment
+import com.cubivue.inlogic.ui.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_access_points.*
 import javax.inject.Inject
 
-open class AccessPointFragment() : DaggerFragment() {
+open class AccessPointFragment() : BaseFragment() {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -31,6 +27,7 @@ open class AccessPointFragment() : DaggerFragment() {
     private lateinit var adapter: AccessPointsAdapter
     private lateinit var layoutManager: LinearLayoutManager
 
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -41,6 +38,8 @@ open class AccessPointFragment() : DaggerFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        setBackButton(false)
 
         viewModel =
             ViewModelProviders.of(this, viewModelFactory).get(AccessPointViewModel::class.java)
@@ -73,7 +72,7 @@ open class AccessPointFragment() : DaggerFragment() {
         list_access_points.adapter = adapter
     }
 
-    private fun doOnResults(results: List<ScanResult>) {
+    fun doOnResults(results: List<ScanResult>) {
 
         viewModel.accessPoints.clear()
         adapter.submitList(viewModel.accessPoints)

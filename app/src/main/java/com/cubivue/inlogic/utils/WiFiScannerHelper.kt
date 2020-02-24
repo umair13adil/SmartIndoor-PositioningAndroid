@@ -50,27 +50,16 @@ class WiFiScannerHelper(
     }
 
     private fun scanSuccess(context: Context?) {
-        if (lifecycle.currentState.isAtLeast(Lifecycle.State.DESTROYED)) {
-            PLog.logThis(TAG, "scanSuccess", "Activity is Destroyed.")
-            unregisterReceiver(context)
-        } else {
-            PLog.logThis(TAG, "scanSuccess", "Success: SCAN_RESULTS_AVAILABLE_ACTION")
-            val results = wifiManager.scanResults
-            doOnResults.invoke(results)
-        }
+        PLog.logThis(TAG, "scanSuccess", "Success: SCAN_RESULTS_AVAILABLE_ACTION")
+        val results = wifiManager.scanResults
+        doOnResults.invoke(results)
     }
 
     private fun scanFailure(context: Context?) {
-
-        if (lifecycle.currentState.isAtLeast(Lifecycle.State.DESTROYED)) {
-            PLog.logThis(TAG, "scanFailure", "Activity is Destroyed.")
-            unregisterReceiver(context)
-        } else {
-            // handle failure: new scan did NOT succeed
-            // consider using old scan results: these are the OLD results!
-            val results = wifiManager.scanResults
-            doOnResults.invoke(results)
-        }
+        // handle failure: new scan did NOT succeed
+        // consider using old scan results: these are the OLD results!
+        val results = wifiManager.scanResults
+        doOnResults.invoke(results)
     }
 
     fun startScanner(attachHandler: Boolean = true) {

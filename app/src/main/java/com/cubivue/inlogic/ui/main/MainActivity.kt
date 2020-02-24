@@ -5,24 +5,35 @@ import android.content.pm.PackageManager
 import android.net.wifi.ScanResult
 import android.os.Build
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import com.cubivue.inlogic.R
 import com.cubivue.inlogic.components.AlarmHelper
+import com.cubivue.inlogic.ui.accessPoint.AccessPointFragment
 import com.cubivue.inlogic.utils.WiFiScannerHelper
 import com.cubivue.inlogic.utils.logs.LogsHelper
+import com.embrace.plog.pLogs.PLog
 import dagger.android.support.DaggerAppCompatActivity
 
 class MainActivity : DaggerAppCompatActivity() {
+
+    private val TAG = "MainActivity"
 
     private val MY_PERMISSIONS_REQUEST = 1
     private val STORAGE_PERMISSIONS_REQUEST = 10
 
     private lateinit var wiFiScannerHelper: WiFiScannerHelper
+    private var accessPointFragment: AccessPointFragment? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        accessPointFragment =
+            supportFragmentManager.findFragmentById(R.id.accessPointFragment) as AccessPointFragment?
     }
 
     private fun getStoragePermissions() {
@@ -84,16 +95,16 @@ class MainActivity : DaggerAppCompatActivity() {
 
         if (requestCode == MY_PERMISSIONS_REQUEST) {
 
-            if(grantResults.isNotEmpty()) {
+            if (grantResults.isNotEmpty()) {
                 if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     setUpWifiScanner()
                 } else {
                     return
                 }
             }
-        }else if (requestCode == STORAGE_PERMISSIONS_REQUEST) {
+        } else if (requestCode == STORAGE_PERMISSIONS_REQUEST) {
 
-            if(grantResults.isNotEmpty()) {
+            if (grantResults.isNotEmpty()) {
                 if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     LogsHelper.setUpPLogger(this)
                     getWifiPermissions()
@@ -109,7 +120,7 @@ class MainActivity : DaggerAppCompatActivity() {
         super.onPause()
     }
 
-    private fun setUpWifiScanner(){
+    private fun setUpWifiScanner() {
         AlarmHelper.startSchedulerAlarm(this)
         wiFiScannerHelper = WiFiScannerHelper(::doOnResults, lifecycle)
         wiFiScannerHelper.setupWifiManager(applicationContext!!, this)
@@ -117,7 +128,7 @@ class MainActivity : DaggerAppCompatActivity() {
     }
 
     private fun doOnResults(results: List<ScanResult>) {
-
+        accessPointFragment?.doOnResults(results)
     }
 
     override fun onResume() {
@@ -128,5 +139,13 @@ class MainActivity : DaggerAppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         AlarmHelper.stopSchedulerAlarm(this)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        val id = item.itemId
+        if (id == android.R.id.home) {
+            Navigation.findNavController(this, R.id.nav_host_fragment).popBackStack()
+        }
+        return super.onOptionsItemSelected(item)
     }
 }

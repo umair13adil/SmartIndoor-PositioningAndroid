@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import com.cubivue.inlogic.R
 import com.cubivue.inlogic.model.room.Room
+import com.cubivue.inlogic.ui.base.BaseFragment
 import com.cubivue.inlogic.ui.rooms.RoomsAdapter
 import com.embrace.plog.pLogs.PLog
 import dagger.android.support.DaggerAppCompatActivity
@@ -17,7 +18,7 @@ import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_rooms.*
 import javax.inject.Inject
 
-class LocateFragment : DaggerFragment() {
+class LocateFragment : BaseFragment() {
 
     private val TAG = "LocateFragment"
 
@@ -41,6 +42,8 @@ class LocateFragment : DaggerFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        setBackButton()
 
         viewModel =
             ViewModelProviders.of(this, viewModelFactory).get(LocateViewModel::class.java)

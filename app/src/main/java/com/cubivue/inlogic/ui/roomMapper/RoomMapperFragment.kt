@@ -12,6 +12,7 @@ import com.cubivue.inlogic.R
 import com.cubivue.inlogic.model.accessPoint.AccessPoint
 import com.cubivue.inlogic.model.enums.AccessPointPosition
 import com.cubivue.inlogic.model.room.Room
+import com.cubivue.inlogic.ui.base.BaseFragment
 import com.cubivue.inlogic.utils.showToast
 import com.embrace.plog.pLogs.PLog
 import dagger.android.support.DaggerAppCompatActivity
@@ -20,7 +21,7 @@ import kotlinx.android.synthetic.main.fragment_room_mapper.*
 import java.util.*
 import javax.inject.Inject
 
-class RoomMapperFragment : DaggerFragment(),
+class RoomMapperFragment : BaseFragment(),
     AccessPointSelectionDialog.AccessPointSelectionListener {
 
     private val TAG = "RoomMapperFragment"
@@ -49,6 +50,7 @@ class RoomMapperFragment : DaggerFragment(),
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setBackButton()
 
         viewModel =
             ViewModelProviders.of(this, viewModelFactory).get(RoomMapperViewModel::class.java)

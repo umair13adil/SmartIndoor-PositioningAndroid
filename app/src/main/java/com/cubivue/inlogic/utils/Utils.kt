@@ -3,6 +3,7 @@ package com.cubivue.inlogic.utils
 import android.app.Activity
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import com.cubivue.inlogic.model.enums.AccessPointPosition
 
 fun getAccessPointPosition(position: Int): AccessPointPosition {
@@ -21,4 +22,8 @@ fun Activity.showToast(message: String) {
 
 fun Fragment.showToast(message: String) {
     Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+}
+
+fun Fragment.finishFragment(fragment: Fragment) {
+    this.fragmentManager?.beginTransaction()?.remove(fragment)?.commitAllowingStateLoss()
 }
