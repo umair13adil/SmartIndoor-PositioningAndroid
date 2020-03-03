@@ -1,0 +1,28 @@
+package com.umair.archiTemplate2.utils
+
+import android.app.Activity
+import android.widget.Toast
+import androidx.fragment.app.Fragment
+import com.umair.archiTemplate2.model.enums.AccessPointPosition
+
+fun getAccessPointPosition(position: Int): AccessPointPosition {
+    when (position) {
+        1 -> return AccessPointPosition.ACCESS_POINT_TOP_LEFT
+        2 -> return AccessPointPosition.ACCESS_POINT_TOP_RIGHT
+        3 -> return AccessPointPosition.ACCESS_POINT_BOTTOM_LEFT
+        4 -> return AccessPointPosition.ACCESS_POINT_BOTTOM_RIGHT
+    }
+    return AccessPointPosition.ACCESS_POINT_UNDEFINED
+}
+
+fun Activity.showToast(message: String) {
+    Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+}
+
+fun Fragment.showToast(message: String) {
+    Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+}
+
+fun Fragment.finishFragment(fragment: Fragment) {
+    this.fragmentManager?.beginTransaction()?.remove(fragment)?.commitAllowingStateLoss()
+}

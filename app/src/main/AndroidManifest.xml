@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.cubivue.inlogic">
+    package="com.umair.archiTemplate2">
 
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
@@ -12,7 +12,7 @@
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
     <application
-        android:name=".MainApplication"
+        android:name="com.umair.archiTemplate2.MainApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -21,7 +21,7 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name=".ui.main.MainActivity"
+            android:name="com.umair.archiTemplate2.ui.main.MainActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -31,14 +31,14 @@
         </activity>
 
         <receiver
-            android:name=".components.AlarmReceiver"
+            android:name="com.umair.archiTemplate2.components.AlarmReceiver"
             android:enabled="true">
             <intent-filter>
-                <action android:name="com.cubivue.inlogic.alarmIntent" />
+                <action android:name="com.umair.archiTemplate2.alarmIntent" />
             </intent-filter>
         </receiver>
 
-        <service android:name=".components.ScannerService" />
+        <service android:name="com.umair.archiTemplate2.components.ScannerService" />
     </application>
 
 </manifest>

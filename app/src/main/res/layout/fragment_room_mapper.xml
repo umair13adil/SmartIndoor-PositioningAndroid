@@ -19,8 +19,11 @@
             android:layout_width="@dimen/margin_150"
             android:layout_height="wrap_content"
             android:layout_gravity="top|left"
+            android:drawableStart="@drawable/ic_add_circle_black_24dp"
+            android:drawablePadding="@dimen/margin_2"
             android:ellipsize="end"
-            android:text="Access Point 1" />
+            android:gravity="center"
+            android:text="AP 1" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/select_ap_2"
@@ -28,8 +31,11 @@
             android:layout_width="@dimen/margin_150"
             android:layout_height="wrap_content"
             android:layout_gravity="top|right"
+            android:drawableStart="@drawable/ic_add_circle_black_24dp"
+            android:drawablePadding="@dimen/margin_2"
             android:ellipsize="end"
-            android:text="Access Point 2" />
+            android:gravity="center"
+            android:text="AP 2" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/select_ap_3"
@@ -37,8 +43,11 @@
             android:layout_width="@dimen/margin_150"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|left"
+            android:drawableStart="@drawable/ic_add_circle_black_24dp"
+            android:drawablePadding="@dimen/margin_2"
             android:ellipsize="end"
-            android:text="Access Point 3" />
+            android:gravity="center"
+            android:text="AP 3" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/select_ap_4"
@@ -46,8 +55,11 @@
             android:layout_width="@dimen/margin_150"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|right"
+            android:drawableStart="@drawable/ic_add_circle_black_24dp"
+            android:drawablePadding="@dimen/margin_2"
             android:ellipsize="end"
-            android:text="Access Point 4" />
+            android:gravity="center"
+            android:text="AP 4" />
 
         <FrameLayout
             android:layout_width="@dimen/margin_10"
@@ -55,22 +67,31 @@
             android:layout_gravity="center"
             android:background="@drawable/bg_button_blue" />
 
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/edit_room_name"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
             android:layout_marginTop="@dimen/margin_35"
-            android:hint="Enter Room Name" />
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            android:padding="@dimen/margin_10"
+            android:weightSum="1">
 
-        <androidx.appcompat.widget.AppCompatImageButton
-            android:id="@+id/btn_save_room_info"
-            android:layout_width="@dimen/margin_45"
-            android:layout_height="@dimen/margin_45"
-            android:layout_gravity="center"
-            android:layout_marginTop="@dimen/margin_35"
-            android:layout_marginStart="@dimen/margin_110"
-            android:src="@drawable/ic_done_black_24dp" />
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/edit_room_name"
+                android:layout_width="0dp"
+                android:layout_weight="0.7"
+                android:layout_height="wrap_content"
+                android:hint="Enter Room Name" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_save_room_info"
+                style="@style/ButtonStyle"
+                android:layout_width="0dp"
+                android:layout_weight="0.3"
+                android:layout_height="@dimen/margin_45"
+                android:drawableLeft="@drawable/ic_done_black_24dp"
+                android:text="Done" />
+        </LinearLayout>
 
     </FrameLayout>
 

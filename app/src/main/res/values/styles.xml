@@ -19,7 +19,7 @@
     </style>
 
     <style name="ButtonStyle">
-        <item name="android:textColor">@color/universalWhite</item>
+        <item name="android:textColor">@color/colorWhite</item>
         <item name="android:gravity">center</item>
         <item name="android:background">@drawable/bg_button_blue</item>
         <item name="android:paddingLeft">8dp</item>

@@ -1,2 +1,2 @@
 include ':app'
-rootProject.name='In-Logic App'
+rootProject.name='Smart Indoor Location'

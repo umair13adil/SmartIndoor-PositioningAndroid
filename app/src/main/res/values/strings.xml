@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">In-Logic App</string>
+    <string name="app_name">Smart In-Door Positioning</string>
+    <string name="txt_no_room">No room added, please add a room first.</string>
 </resources>
