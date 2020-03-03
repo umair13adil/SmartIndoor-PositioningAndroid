@@ -68,7 +68,7 @@ This screen will display “Person” icon on the room which is closest accordin
 We have also added “Text-to-Speech” functionality to test the app while it is pocket. Device will announce the room name every time it is detected.
 
 ### Flow Diagram
-![Image4](pictures/image4.png)
+![Image4](pictures/picture4.png)
                 
 ## MIT License
 
